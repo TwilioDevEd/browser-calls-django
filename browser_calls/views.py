@@ -15,3 +15,11 @@ class SupportTicketCreate(SuccessMessageMixin, CreateView):
     template_name = 'index.html'
     success_url = reverse_lazy('home')
     success_message = "Your ticket was submitted! An agent will call you soon."
+
+def support_dashboard(request):
+    """Shows the list of support tickets to a support agent"""
+    context = {}
+
+    context['support_tickets'] = SupportTicket.objects.order_by('-timestamp')
+
+    return render(request, 'browser_calls/support_dashboard.html', context)

@@ -6,6 +6,7 @@ from browser_calls.views import SupportTicketCreate
 urlpatterns = [
     # Your URLs go here
     url(r'^$', SupportTicketCreate.as_view(), name='home'),
+    url(r'^browser-calls', include('browser_calls.urls')),
 
     # Include the Django admin
     url(r'^admin/', include(admin.site.urls)),

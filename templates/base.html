@@ -23,16 +23,24 @@
 
   <body>
 
-    <div class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-static-top">
       <div class="container">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="/">Birchwood Bicycle Polo Co.</a>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Birchwood Bicycle Polo Co.</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'support_dashboard' %}">Support dashboard</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
 
     {% block content %}{% endblock content %}
 
