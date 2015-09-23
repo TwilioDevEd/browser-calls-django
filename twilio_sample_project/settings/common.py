@@ -40,7 +40,7 @@ THIRD_PARTY_APPS = (
 )
 
 LOCAL_APPS = (
-    # Your apps go here
+    'browser_calls',
 )
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS

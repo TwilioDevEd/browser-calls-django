@@ -5,7 +5,41 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
-  <h1>Browser Calls</h1>
+  <!-- Main jumbotron -->
+  <div class="jumbotron bicycle-polo-background">
+    <div class="container bicycle-polo-text">
+      <h1 class="text-center"><strong>Birchwood Bicycle Polo Co.</strong></h1>
+      <p>
+        We sell only the finest bicycle polo supplies for those seeking fame and glory in this <a href="https://www.youtube.com/watch?v=DaK9Zj3QHDY" target="_blank">sport of kings</a>.
+      </p>
+      <p>
+        <strong>Having trouble with one of our products?</strong> Fill out the support form below and one of our agents will call you.
+      </p>
+      <p><a class="btn btn-primary btn-lg btn-block" href="#" role="button">Get help</a></p>
+    </div>
+  </div>
 
-  <p>Include a short description of how to use this app here.</p>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+
+        {% include '_messages.html' %}
+
+        <h2>Create a support ticket</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|as_bootstrap }}
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg btn-block">Submit ticket</button>
+            </div>
+        </form>
+
+        <br />
+
+        <small class="pull-right">
+          Header photo courtesy <a href="https://www.flickr.com/photos/tink20seven/4654348885/">David Sachs via Flickr</a>
+        </small>
+      </div>
+    </div>
+  </div>
 {% endblock %}
