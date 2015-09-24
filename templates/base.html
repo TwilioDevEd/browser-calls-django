@@ -36,7 +36,10 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'support_dashboard' %}">Support dashboard</a></li>
+            <li><a href="{% url 'dashboard' %}">Support dashboard</a></li>
+            {% if request.user.is_authenticated %}
+              <li><a href="{% url 'logout' %}">Log out</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>

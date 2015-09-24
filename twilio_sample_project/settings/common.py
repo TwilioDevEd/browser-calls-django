@@ -125,3 +125,6 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR: 'danger'
 }
+
+# Redirect login to /support/dashboard
+LOGIN_REDIRECT_URL = '/support/dashbaord'

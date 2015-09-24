@@ -6,6 +6,7 @@
 // Store some selectors for elements we'll reuse
 var callStatus = $("#call-status");
 var answerButton = $(".answer-button");
+var callSupportButton = $(".call-support-button");
 var hangUpButton = $(".hangup-button");
 var callCustomerButtons = $(".call-customer-button");
 
@@ -14,12 +15,17 @@ function updateCallStatus(status) {
     callStatus.text(status);
 }
 
-/* Create the Client with a Capability Token */
-Twilio.Device.setup(token);
+/* Get a Twilio Client token with an AJAX request */
+$(document).ready(function() {
+    $.get("/support/token", {forPage: window.location.pathname}, function(data) {
+        // Set up the Twilio Client Device with the token
+        Twilio.Device.setup(data.token);
+    });
+});
 
-/* Let us know when the client is ready. */
+/* Callback to let us know Twilio Client is ready */
 Twilio.Device.ready(function (device) {
-    updateCallStatus("Ready to make and receive calls");
+    updateCallStatus("Ready");
 });
 
 /* Report any errors to the call status display */
@@ -27,24 +33,58 @@ Twilio.Device.error(function (error) {
     updateCallStatus("ERROR: " + error.message);
 });
 
+/* Callback to determine if "support_agent" is available or not */
+Twilio.Device.presence(function(presenceEvent) {
+    console.log(presenceEvent);
+    if (presenceEvent.from === 'support_agent') {
+        if (presenceEvent.available) {
+            $("#support-unavailable").hide();
+        } else {
+            $("#support-unavailable").show();
+        }
+    }
+});
+
 /* Callback for when Twilio Client initiates a new connection */
-Twilio.Device.connect(function (conn) {
+Twilio.Device.connect(function (connection) {
     // Enable the hang up button and disable the call buttons
     hangUpButton.prop("disabled", false);
     callCustomerButtons.prop("disabled", true);
+    callSupportButton.prop("disabled", true);
+    answerButton.prop("disabled", true);
 
-    updateCallStatus("In call with " + conn.message.phoneNumber);
-
-    console.log("Successfully established call");
+    // If phoneNumber is part of the connection, this is a call from a
+    // support agent to a customer's phone
+    if ("phoneNumber" in connection.message) {
+        updateCallStatus("In call with " + connection.message.phoneNumber);
+    } else {
+        // This is a call from a website user to a support agent
+        updateCallStatus("In call with support");
+    }
 });
 
-/* Disable the hangup button at the end of a call */
+/* Callback for when a call ends */
 Twilio.Device.disconnect(function(connection) {
     // Disable the hangup button and enable the call buttons
     hangUpButton.prop("disabled", true);
     callCustomerButtons.prop("disabled", false);
 
-    updateCallStatus("Ready to make and receive calls");
+    updateCallStatus("Ready");
+});
+
+/* Callback for when Twilio Client receives a new incoming call */
+Twilio.Device.incoming(function(connection) {
+    updateCallStatus("Incoming support call");
+
+    connection.accept(function() {
+        updateCallStatus("In call with customer");
+    });
+
+    // Set a callback on the answer button and enable it
+    answerButton.click(function() {
+        connection.accept();
+    });
+    answerButton.prop("disabled", false);
 });
 
 /* Call a customer from a support ticket */
@@ -55,6 +95,15 @@ function callCustomer(phoneNumber) {
     Twilio.Device.connect(params);
 }
 
+/* Call the support_agent from the home page */
+function callSupport() {
+    updateCallStatus("Calling support...");
+
+    // Our backend will assume that no params means a call to support_agent
+    Twilio.Device.connect();
+}
+
+/* End a call */
 function hangUp() {
     Twilio.Device.disconnectAll();
 }

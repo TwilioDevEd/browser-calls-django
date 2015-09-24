@@ -16,7 +16,7 @@
   }
 }
 
-.answer-button {
+.answer-button, .call-support-button {
     width: 48%;
     float: left;
 }
