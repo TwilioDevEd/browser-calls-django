@@ -50,6 +50,9 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     pip install -r requirements.txt
     ```
+1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/user/account/voice) and the phone number and TwimL App Sid you made above
+
+1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
 
 1. Start a local PostgreSQL database and create a database called `browser_calls`:
     - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE browser_calls;`
@@ -66,9 +69,6 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     python manage.py createsuperuser
     ```
-
-1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/user/account/voice) and the phone number and TwimL App Sid you made above
-1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
 1. Start the development server
 
     ```
