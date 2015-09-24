@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.8/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.8/ref/settings/
 """
+from django.core.exceptions import ImproperlyConfigured
+
 import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,14 +25,22 @@ SECRET_KEY = 'not-so-secret'
 ALLOWED_HOSTS = []
 
 # Twilio API credentials
-TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
-TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 
 # Twilio number
-TWILIO_NUMBER = os.environ['TWILIO_NUMBER']
+TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER')
 
 # TwiML Application SID
-TWIML_APPLICATION_SID = os.environ['TWIML_APPLICATION_SID']
+TWIML_APPLICATION_SID = os.environ.get('TWIML_APPLICATION_SID')
+
+if not (TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN and TWILIO_NUMBER and TWIML_APPLICATION_SID):
+    missing_config_values = \
+    """
+    You must set the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER, and TWIML_APPLICATION_SID environment variables to run this app.
+    Consult the README for instructions on how to find them.
+    """
+    raise ImproperlyConfigured(missing_config_values)
 
 # Application definition
 
