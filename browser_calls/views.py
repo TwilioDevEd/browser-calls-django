@@ -40,7 +40,7 @@ def get_token(request):
 
     # If the user is on the support dashboard page, we allow them to accept
     # incoming calls to "support_user"
-    # (in a real app we would also requiree the user to be authenticated)
+    # (in a real app we would also require the user to be authenticated)
     if request.GET['forPage'] == reverse('dashboard'):
         capability.allow_client_incoming('support_agent')
     else:
