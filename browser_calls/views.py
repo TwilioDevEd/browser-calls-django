@@ -44,6 +44,7 @@ def get_token(request):
     if request.user.is_authenticated() and request.GET['forPage'] == reverse('dashboard'):
         capability.allow_client_incoming('support_agent')
     else:
+        # Otherwise we give them a name of "customer"
         capability.allow_client_incoming('customer')
 
     token = capability.generate()
