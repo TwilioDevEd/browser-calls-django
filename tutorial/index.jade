@@ -1,0 +1,114 @@
+.chapter(data-title='Browser Calls with Twilio and Django')
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='91-105')
+    :markdown
+      ## What does this thing do?
+
+      - Brief overview of app
+      - Links to README
+      - Include screenshot of home page
+
+  .step(data-file='browser_calls/views.py', data-highlight='15-21')
+    :markdown
+      ## Submit a support ticket
+
+      - Explain use of CreateView class-based view to power support form page
+      - Include definition of SupportTicket model as prose code snippet
+      - Include a note about django-phonenumberfield
+
+      ```
+      class SupportTicket(models.Model):
+          """A support ticket submitted by an unsatisfied customer :("""
+
+          name = models.CharField(max_length=100)
+          phone_number = PhoneNumberField(help_text='Must include international prefix - e.g. +1 555 555 55555')
+          description = models.TextField(help_text='A description of your problem')
+
+          timestamp = models.DateTimeField(auto_now_add=True)
+      ```
+
+  .step(data-file='templates/browser_calls/support_dashboard.html', data-highlight='35-55')
+    :markdown
+      ## The support dashboard
+
+      - Explain how the support dashboard displays each SupportTicket
+      - In addition to a "Call Customer" button which uses the phone_number from
+      the ticket as the argument to the callCustomer function
+
+  .step(data-file='browser_calls/views.py', data-highlight='33-52')
+    :markdown
+      ## Generate a Capability Token
+
+      - Generating a capability token server-side is the first step to using Twilio Client
+      - Discuss `allow_client_outgoing` and `allow_client_incoming` methods
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='18-29')
+    :markdown
+      ## Set up Twilio Client
+
+      - Discuss hitting our AJAX view to generate the capability token
+      - And then passing that token to `Twilio.Device.setup()`
+      - Also mention the `.ready()` callback (and maybe the `.error()` callback)
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='91-97')
+    :markdown
+      ## Call a customer (browser-to-phone)
+
+      - Discuss Twilio.Device.connect()
+      - Explain why we pass `params` and how they end up in the `call` view
+
+  .step(data-file='browser_calls/views.py', data-highlight='55-64, 70')
+    :markdown
+      ## Connect the call to a phone number
+
+      - Discuss using TwiML to instruct Twilio how to handle the outgoing call
+      - Highlight how our `phoneNumber` param appears in the POST request
+      - Explain that requiring server-side TwiML is a security/abuse prevention feature (I assume?)
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='47-63')
+    :markdown
+      ## Complete the connection
+
+      - Twilio has now connected the call
+      - Discuss the `.connect()` callback - used to update UI elements
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='99-105')
+    :markdown
+      ## Call a support agent (browser-to-browser)
+
+      - Include screenshot of homepage "Talk to support now pane"
+      - Mention use of `.connect()` again, but without parameters because
+      our backend will assume this is a call for the support client
+
+  .step(data-file='browser_calls/views.py', data-highlight='55-70, 33-34, 41-45')
+    :markdown
+      ## Connect the call to the support client
+
+      - Point out that we named the support dashboard's client `support_agent` when
+      we generated their capability token
+      - Our `call` view generates TwiML connecting the call to the `support_agent`
+      client device
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='75-89')
+    :markdown
+      ## Answer the call
+
+      - Discuss the `.incoming()` callback for handling incoming calls
+      - Explain the `.answer()` callback and setting an anonymous click function
+      on the `answerButton` element
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='36-45')
+    :markdown
+      ## Check if a support agent is available
+
+      - One sentence about why seeing if support is online is useful
+      - Discuss use of `.presence()` callback to implement this feature
+
+  .step
+    :markdown
+      ## Where to next?
+
+      - Wrap up text
+      - Link to other tutorials:
+        - Click to call
+        - Automated Survey
+      - Tweet us with feedback
