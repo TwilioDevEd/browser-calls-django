@@ -1,4 +1,3 @@
-from django.contrib.auth.models import User
 from django.test import TestCase, Client
 from model_mommy import mommy
 
@@ -45,15 +44,7 @@ class HomePageTest(TestCase):
 class SupportDashboardTest(TestCase):
 
     def setUp(self):
-        # Create a support user we can authenticate with
-        user = User.objects.create_user('support_agent', '', 'password')
-
         self.client = Client()
-        self.client.login(username='support_agent', password='password')
-
-    def tearDown(self):
-        # Remove the support user so we don't impact other tests
-        User.objects.get(username='support_agent').delete()
 
     def test_support_dashboard(self):
         # Arrange
@@ -82,7 +73,7 @@ class GetTokenTest(TestCase):
 
         # Act
         with patch('browser_calls.views.TwilioCapability', return_value=mock_capability) as mock:
-            response = self.client.get('/support/token')
+            response = self.client.get('/support/token', {'forPage': '/'})
 
         # Assert
         # Make sure our mock_capability object was called with the right
@@ -95,9 +86,6 @@ class GetTokenTest(TestCase):
 
     def test_get_token_authenticated(self):
         # Arrange
-        user = User.objects.create_user('support_agent', '', 'password')
-        self.client.login(username='support_agent', password='password')
-
         mock_capability = MagicMock()
         mock_capability.generate.return_value = 'foo123'
 
@@ -111,10 +99,6 @@ class GetTokenTest(TestCase):
         self.assertTrue(mock_capability.generate.called)
 
         self.assertEqual(response.content, b'{"token": "foo123"}')
-
-        # Cleanup
-        self.client.logout()
-        User.objects.get(username='support_agent').delete()
 
 
 class CallTest(TestCase):

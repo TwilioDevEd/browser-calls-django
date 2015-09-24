@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse, JsonResponse
@@ -22,7 +21,6 @@ class SupportTicketCreate(SuccessMessageMixin, CreateView):
     success_message = "Your ticket was submitted! An agent will call you soon."
 
 
-@login_required(login_url=reverse_lazy('login'))
 def support_dashboard(request):
     """Shows the list of support tickets to a support agent"""
     context = {}
@@ -40,9 +38,10 @@ def get_token(request):
 
     capability.allow_client_outgoing(settings.TWIML_APPLICATION_SID)
 
-    # If the user is authenticated and on the support dashboard page,
-    # we allow them to accept incoming calls to "support_user"
-    if request.user.is_authenticated() and request.GET['forPage'] == reverse('dashboard'):
+    # If the user is on the support dashboard page, we allow them to accept
+    # incoming calls to "support_user"
+    # (in a real app we would also requiree the user to be authenticated)
+    if request.GET['forPage'] == reverse('dashboard'):
         capability.allow_client_incoming('support_agent')
     else:
         # Otherwise we give them a name of "customer"

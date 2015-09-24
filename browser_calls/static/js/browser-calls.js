@@ -35,7 +35,6 @@ Twilio.Device.error(function (error) {
 
 /* Callback to determine if "support_agent" is available or not */
 Twilio.Device.presence(function(presenceEvent) {
-    console.log(presenceEvent);
     if (presenceEvent.from === 'support_agent') {
         if (presenceEvent.available) {
             $("#support-unavailable").hide();
@@ -77,6 +76,7 @@ Twilio.Device.disconnect(function(connection) {
 Twilio.Device.incoming(function(connection) {
     updateCallStatus("Incoming support call");
 
+    // Set a callback to be executed when the connection is accepted
     connection.accept(function() {
         updateCallStatus("In call with customer");
     });
