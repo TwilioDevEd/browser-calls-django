@@ -16,7 +16,7 @@ def create_sample_data(apps, schema_editor):
     SupportTicket.objects.create(
         name='Charles Holdsworth',
         phone_number='+15555555555',
-        description='I have another funny joke!')
+        description='[I will come up with some other jokes to go here]')
 
 
 class Migration(migrations.Migration):
