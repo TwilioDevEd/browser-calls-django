@@ -21,7 +21,7 @@ You can learn more about TwiML apps here: https://www.twilio.com/help/faq/twilio
 
 To run this project you will also need a Twilio phone number. You can purchase a new number in your [Twilio Account Dashboard](https://www.twilio.com/user/account/phone-numbers/incoming).
 
-Once you have that number, you will need to configure it to use the TwimL app you created above. This GIF shows you how:
+Once you have that number, you will need to configure it to use the TwiML app you created above. This GIF shows you how:
 
 ![Configuring a Twilio number with a TwimL App](http://howtodocs.s3.amazonaws.com/twilio-number-config-all-med.gif)
 
