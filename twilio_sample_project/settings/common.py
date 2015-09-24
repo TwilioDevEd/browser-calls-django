@@ -22,6 +22,16 @@ SECRET_KEY = 'not-so-secret'
 
 ALLOWED_HOSTS = []
 
+# Twilio API credentials
+TWILIO_ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
+TWILIO_AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+
+# Twilio number
+TWILIO_NUMBER = os.environ['TWILIO_NUMBER']
+
+# TwiML Application SID
+TWIML_APPLICATION_SID = os.environ['TWIML_APPLICATION_SID']
+
 # Application definition
 
 DJANGO_APPS = (

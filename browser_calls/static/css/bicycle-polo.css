@@ -15,3 +15,13 @@
     width: 40%;
   }
 }
+
+.answer-button {
+    width: 48%;
+    float: left;
+}
+
+.hangup-button {
+    width: 48%;
+    float: right;
+}
