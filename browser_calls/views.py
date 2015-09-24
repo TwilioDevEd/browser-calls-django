@@ -10,7 +10,6 @@ from django.views.generic import CreateView
 from twilio import twiml
 from twilio.util import TwilioCapability
 
-from .forms import SupportTicketForm
 from .models import SupportTicket
 
 
@@ -22,6 +21,7 @@ class SupportTicketCreate(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy('home')
     success_message = "Your ticket was submitted! An agent will call you soon."
 
+
 @login_required(login_url=reverse_lazy('login'))
 def support_dashboard(request):
     """Shows the list of support tickets to a support agent"""
@@ -30,6 +30,7 @@ def support_dashboard(request):
     context['support_tickets'] = SupportTicket.objects.order_by('-timestamp')
 
     return render(request, 'browser_calls/support_dashboard.html', context)
+
 
 def get_token(request):
     """Returns a Twilio Client token"""
@@ -50,6 +51,7 @@ def get_token(request):
     token = capability.generate()
 
     return JsonResponse({'token': token})
+
 
 @csrf_exempt
 def call(request):
