@@ -38,17 +38,20 @@
             <div class="panel-heading">
               <h3 class="panel-title">Ticket #{{ ticket.id }} <small class="pull-right">{{ ticket.timestamp }}</small></h3>
             </div>
+
             <div class="panel-body">
+
               <div class="pull-right">
-                <button type="button" class="btn btn-primary btn-lg call-customer-button" onclick="callCustomer('{{ ticket.phone_number }}')">
+                <button onclick="callCustomer('{{ ticket.phone_number }}')" type="button" class="btn btn-primary btn-lg call-customer-button">
                   <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span>  Call customer
                 </button>
               </div>
+
               <p><strong>Name:</strong> {{ ticket.name }}</p>
               <p><strong>Phone number:</strong> {{ ticket.phone_number.as_international }}</p>
-              
               <p><strong>Description:</strong></p>
               {{ ticket.description|linebreaks }}
+
             </div>
           </div>
         {% endfor %}
