@@ -13,7 +13,7 @@
 <p>This <a href="http://djangoproject.com/">Django</a> web application shows how you can
 use <a href="https://www.twilio.com/client">Twilio Client</a> to make
 browser-to-phone and browser-to-browser calls.</p>
-<p><em>Insert screenshot here</em></p>
+<p><img src="http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-home.png" alt="Browser Calls home page"></p>
 <p>This application powers the support site for the Birchwood Bicycle Polo
 Co., which sells equipment to those who play
 <a href="https://www.youtube.com/watch?v=DaK9Zj3QHDY">&quot;the sport of kings.&quot;</a> It
@@ -65,7 +65,7 @@ library.</p>
 </div><div data-file="templates/browser_calls/support_dashboard.html" data-highlight="35-58" class="step"><h2 id="the-support-dashboard">The support dashboard</h2>
 <p>When a support agent visits <code>/support/dashboard</code>, they see all the support
 tickets which have been submitted.</p>
-<p><em>Maybe include a screenshot here</em></p>
+<p><img src="http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-dashboard.png" alt="Browser Calls support dashboard"></p>
 <p>Each ticket also has a &quot;Call Customer&quot; button which invokes a JavaScript
 function we wrote named <code>callCustomer()</code>. That function kicks off a Twilio
 Client call to the phone number passed as its sole parameter.</p>
@@ -149,7 +149,7 @@ offers some additional details about the call.</p>
 <p>Support tickets are useful, but sometimes a customer needs help right now.
 With just a little more work we let customers speak with a support agent
 live via a browser-to-browser call.</p>
-<p><em>Include screenshot of home page call support panel</em></p>
+<p><img src="http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-call-support.png" alt="Browser Calls call support"></p>
 <p>When a customer clicks &quot;Call support&quot; on the home page we again use
 <code>Twilio.Device.connect()</code> to initiate the call. This time we don&#39;t pass
 any additional parameters — our backend will route this call to our
@@ -201,7 +201,7 @@ above, to reset some UI elements.</p>
 <p>If a customer calls support but no support agent is online, their call
 will go unanswered. To help avoid this frustration, we display a message
 above the &quot;Call support&quot; button when no agent is available:</p>
-<p><em>Image of no support agent available</em></p>
+<p><img src="http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-support-unavailable.png" alt="Browser Calls support unavailable"></p>
 <p>We use <code>Twilio.Device.presence()</code> to update this message when the
 support agent&#39;s availability changes.</p>
 <hr>

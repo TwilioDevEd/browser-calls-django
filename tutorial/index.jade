@@ -7,7 +7,7 @@
       use [Twilio Client](https://www.twilio.com/client) to make
       browser-to-phone and browser-to-browser calls.
 
-      *Insert screenshot here*
+      ![Browser Calls home page](http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-home.png)
 
       This application powers the support site for the Birchwood Bicycle Polo
       Co., which sells equipment to those who play
@@ -76,7 +76,7 @@
       When a support agent visits `/support/dashboard`, they see all the support
       tickets which have been submitted.
 
-      *Maybe include a screenshot here*
+      ![Browser Calls support dashboard](http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-dashboard.png)
 
       Each ticket also has a "Call Customer" button which invokes a JavaScript
       function we wrote named `callCustomer()`. That function kicks off a Twilio
@@ -199,7 +199,7 @@
       With just a little more work we let customers speak with a support agent
       live via a browser-to-browser call.
 
-      *Include screenshot of home page call support panel*
+      ![Browser Calls call support](http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-call-support.png)
 
       When a customer clicks "Call support" on the home page we again use
       `Twilio.Device.connect()` to initiate the call. This time we don't pass
@@ -277,7 +277,7 @@
       will go unanswered. To help avoid this frustration, we display a message
       above the "Call support" button when no agent is available:
 
-      *Image of no support agent available*
+      ![Browser Calls support unavailable](http://howtodocs.s3.amazonaws.com/browser-calls/browser-calls-support-unavailable.png)
 
       We use `Twilio.Device.presence()` to update this message when the
       support agent's availability changes.
