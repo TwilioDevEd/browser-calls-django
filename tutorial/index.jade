@@ -3,9 +3,31 @@
     :markdown
       ## What does this thing do?
 
-      - Brief overview of app [Django](http://djangoproject.com/)
-      - Links to README
-      - Include screenshot of home page
+      This [Django](http://djangoproject.com/) web application shows how you can
+      use [Twilio Client](https://www.twilio.com/client) to make
+      browser-to-phone and browser-to-browser calls.
+
+      *Insert screenshot here*
+
+      This application powers the support site for the Birchwood Bicycle Polo
+      Co., which sells equipment to those who play
+      ["the sport of kings."](https://www.youtube.com/watch?v=DaK9Zj3QHDY) It
+      has three main features:
+
+      - Unsatisfied customers can submit support tickets with their phone number
+      and their problem
+      - Support agents can call customers' phones from their browser to follow up
+      on support tickets
+      - Customers can also use their browser to speak with support agents live
+      when available
+
+      In this tutorial, we'll point out the key bits of code that make this
+      application work.
+      [Check out the project README on GitHub](https://github.com/TwilioDevEd/browser-calls-django)
+      to see how to run the code yourself.
+
+      Let's get started! Click the right arrow above to advance to the next
+      code snippet.
 
       ---
 
@@ -19,9 +41,15 @@
     :markdown
       ## Submit a support ticket
 
-      - Explain use of [CreateView](https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#createview) class-based view to power support form page
-      - Include definition of SupportTicket model as prose code snippet
-      - Include a note about [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)
+      The home page of our app displays a form for customers to submit support
+      tickets. We use one of Django's generic class-based views,
+      [CreateView](https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#createview)
+      to power the page.
+
+      The `SupportTicket` model itself has just a few fields. The `phone_number`
+      field uses the
+      [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)
+      library.
 
       ```
       class SupportTicket(models.Model):
@@ -38,23 +66,39 @@
 
       **See also:**
 
-      * [Django Class-based views](https://docs.djangoproject.com/en/1.8/topics/class-based-views/)
-      * [Django Models](https://docs.djangoproject.com/en/1.8/topics/db/models/)
+      * [Django class-based views](https://docs.djangoproject.com/en/1.8/topics/class-based-views/generic-editing/#model-forms)
+      * [Django models](https://docs.djangoproject.com/en/1.8/topics/db/models/)
 
   .step(data-file='templates/browser_calls/support_dashboard.html', data-highlight='35-58')
     :markdown
       ## The support dashboard
 
-      - Explain how the support dashboard displays each SupportTicket
-      - In addition to a "Call Customer" button which uses the phone_number from
-      the ticket as the argument to the callCustomer function
+      When a support agent visits `/support/dashboard`, they see all the support
+      tickets which have been submitted.
 
-  .step(data-file='browser_calls/views.py', data-highlight='33-52')
+      *Maybe include a screenshot here*
+
+      Each ticket also has a "Call Customer" button which invokes a JavaScript
+      function we wrote named `callCustomer()`. That function kicks off a Twilio
+      Client call to the phone number passed as its sole parameter.
+
+  .step(data-file='browser_calls/views.py', data-highlight='33-41, 52-55')
     :markdown
-      ## Generate a Capability Token
+      ## Generate a capability token
 
-      - Generating a capability token server-side is the first step to using Twilio Client
-      - Discuss `allow_client_outgoing` and `allow_client_incoming` methods
+      Before our users can make calls with Twilio Client in their browser, we
+      need to provide them with a capability token.
+
+      We use the [twilio-python](https://twilio-python.readthedocs.org/en/latest/)
+      helper library to generate and configure our capability tokens. To allow
+      our support agents to call the phone numbers on our tickets, we use the
+      `allow_client_outgoing()` method.
+
+      That method requires an identifier for a
+      [TwiML Application](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app).
+      Twilio will send a POST request to our backend every time a user makes a
+      Twilio Client call — the TwiML Application tells Twilio which URL to send
+      that request to.
 
       ---
 
@@ -67,126 +111,176 @@
     :markdown
       ## Set up Twilio Client
 
-      - Discuss hitting our AJAX view to generate the capability token
-      - And then passing that token to `Twilio.Device.setup()`
-      - Also mention the [.ready()](https://www.twilio.com/docs/client/device#ready)
-      callback (and maybe the [.error()](https://www.twilio.com/docs/client/device#error) callback)
+      To use Twilio Client in a web browser we use the
+      [twilio.js library](https://www.twilio.com/docs/client/twilio-js).
+
+      We start by retrieving a capability token from the view we defined in the
+      previous step with an AJAX request. We then enable Twilio Client
+      for this page by passing our token to `Twilio.Device.setup()`.
+
+      The `Twilio.Device.ready()` callback lets us know when the browser is
+      ready to make and receive calls.
 
       ---
 
       **See also:**
 
       * [jQuery `.get()`](https://api.jquery.com/jquery.get/)
-      * [Twilio Device.setup()](https://www.twilio.com/docs/client/device#setup)
+      * [Twilio.Device.setup()](https://www.twilio.com/docs/client/device#setup)
+      * [Twilio.Device.ready()](https://www.twilio.com/docs/client/device#ready)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='91-97')
     :markdown
       ## Call a customer (browser-to-phone)
 
-      - Discuss Twilio.Device.connect()
-      - Explain why we pass `params` and how they end up in the `call` view
+      When our support agent clicks "Call Customer" on a support ticket, this
+      function initiates the call.
+
+      We use `Twilio.Device.connect()` to begin a new outgoing call. Our backend
+      will tell Twilio how to handle this call, so we include a `phoneNumber`
+      parameter that we'll use in our `call` view.
+
+      Let's look at that view next.
 
       ---
 
       **See also:**
 
-      * [Twilio Device.connect()](https://www.twilio.com/docs/client/device#connect)
+      * [Twilio.Device.connect()](https://www.twilio.com/docs/client/device#connect)
 
-  .step(data-file='browser_calls/views.py', data-highlight='55-64, 70')
+  .step(data-file='browser_calls/views.py', data-highlight='58-67, 73')
     :markdown
       ## Connect the call to a phone number
 
-      - Discuss using TwiML to instruct Twilio how to handle the outgoing call
-      - Highlight how our `phoneNumber` param appears in the POST request
-      - Explain that requiring server-side TwiML is a security/abuse prevention feature (I assume?)
+      Whenever one of our users makes a call, Twilio will send a POST request to
+      the Voice Request URL we set on our TwiML Application - in this case,
+      `/support/call`.
+
+      We use [TwiML](https://www.twilio.com/docs/api/twiml) to respond to the
+      request and tell Twilio how to handle the call. Twilio will include the
+      `phoneNumber` parameter from the previous step in its POST request, which
+      we pass to a 
+      [<Number>](https://www.twilio.com/docs/api/twiml/number) entry
+      in our TwiML.
 
       ---
 
       **See also:**
 
-      * [<Number> TwiML noun](https://www.twilio.com/docs/api/twiml/number)
+      * [<Dial> TwiML verb](https://www.twilio.com/docs/api/twiml/dial)
       * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
+      * [Django @csrf_exempt decorator](https://docs.djangoproject.com/en/1.8/ref/csrf/#django.views.decorators.csrf.csrf_exempt)
 
-  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='47-63')
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='47-58, 62-63')
     :markdown
-      ## Complete the connection
+      ## The call is live
 
-      - Twilio has now connected the call
-      - Discuss the `.connect()` callback - used to update UI elements
+      After our `call` view from the previous step responds, Twilio
+      completes the connection between our support agent's browser and the
+      customer's phone.
+
+      We use the `Twilio.Device.connect()` callback to update some UI elements
+      and make it clear our user is in a call. This function receives a
+      [Connection](https://www.twilio.com/docs/client/connection) object, which
+      offers some additional details about the call.
 
       ---
 
       **See also:**
 
-      * [Twilio Device.connect() callback](https://www.twilio.com/docs/client/device#connect-handler)
-      * [jQuery .prop() docs](http://api.jquery.com/prop/)
+      * [Twilio.Device.connect() callback](https://www.twilio.com/docs/client/device#connect-handler)
+      * [jQuery .prop()](http://api.jquery.com/prop/)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='99-105')
     :markdown
       ## Call a support agent (browser-to-browser)
 
-      - Include screenshot of homepage "Talk to support now pane"
-      - Mention use of `.connect()` again, but without parameters because
-      our backend will assume this is a call for the support client
+      Support tickets are useful, but sometimes a customer needs help right now.
+      With just a little more work we let customers speak with a support agent
+      live via a browser-to-browser call.
+
+      *Include screenshot of home page call support panel*
+
+      When a customer clicks "Call support" on the home page we again use
+      `Twilio.Device.connect()` to initiate the call. This time we don't pass
+      any additional parameters — our backend will route this call to our
+      support agent. 
 
       ---
 
       **See also:**
 
-      * [Twilio Device.connect()](https://www.twilio.com/docs/client/device#connect)
+      * [Twilio.Device.connect()](https://www.twilio.com/docs/client/device#connect)
 
-  .step(data-file='browser_calls/views.py', data-highlight='55-70, 33-34, 41-45')
+  .step(data-file='browser_calls/views.py', data-highlight='46-47, 43-45, 58-73')
     :markdown
-      ## Connect the call to the support client
+      ## Connect the call to the support agent's client
 
-      - Point out that we named the support dashboard's client `support_agent` when
-      we generated their capability token
-      - Our `call` view generates TwiML connecting the call to the `support_agent`
-      client device
+      To allow our support agents to accept incoming calls we use the
+      `allow_client_incoming()` method when generating their capability token,
+      passing `support_agent` as the client's name.
+
+      When Twilio sends a POST request to our `call` view, we can connect the
+      call to our support agent by responding with a
+      [<Client>](https://www.twilio.com/docs/api/twiml/client) TwiML noun and
+      the `support_agent` name.
 
       ---
 
       **See also:**
 
-      * [<Client> TwiML noun](https://www.twilio.com/docs/api/twiml/client)
       * [Allow Incoming Connections on Capability Tokens](https://www.twilio.com/docs/client/capability-tokens#allow-incoming-connections)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='75-89')
     :markdown
       ## Answer the call
 
-      - Discuss the `.incoming()` callback for handling incoming calls
-      - Explain the `.answer()` callback and setting an anonymous click function
-      on the `answerButton` element
+      When our support agent's client receives an incoming call, it will trigger
+      the function we defined on the `Twilio.Device.incoming()` callback.
+
+      The incoming `connection` will be in a "pending" state until we invoke its
+      `.accept()` method, which we do in a function bound to the "Answer
+      call" button.
+
+      We also set a `.accept()` callback to update the UI once the call is live.
 
       ---
 
       **See also:**
 
-      * [Twilio Client .incoming()](https://www.twilio.com/docs/client/device#incoming)
-      * [Twilio Client .answer()](https://www.twilio.com/docs/client/connection#accept)
+      * [Twilio.Device.incoming()](https://www.twilio.com/docs/client/device#incoming)
+      * [Twilio.Device.accept()](https://www.twilio.com/docs/client/connection#accept)
+      * [jQuery .click()](https://api.jquery.com/click/)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='107-110, 65-73')
     :markdown
       ## End a call
 
-      - Simply call out `Twilio.Device.disconnectAll()`
-      - And the disconnect callback
+      To end a call we invoke `Twilio.Device.disconnectAll()`, which we wired
+      to the "Hang up" button in our UI.
+
+      We also define a callback function with `Twilio.Device.disconnect()`,
+      above, to reset some UI elements.
 
       ---
 
       **See also:**
 
-      https://www.twilio.com/docs/client/device#disconnect-all
-      https://www.twilio.com/docs/client/device#disconnect
-      * [jQuery .prop() docs](http://api.jquery.com/prop/)
+      * [Twilio.Device.disconnectAll()](https://www.twilio.com/docs/client/device#disconnect-all)
+      * [Twilio.Device.disconnect()](https://www.twilio.com/docs/client/device#disconnect)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='36-45')
     :markdown
       ## Check if a support agent is available
 
-      - One sentence about why seeing if support is online is useful
-      - Discuss use of `.presence()` callback to implement this feature
+      If a customer calls support but no support agent is online, their call
+      will go unanswered. To help avoid this frustration, we display a message
+      above the "Call support" button when no agent is available:
+
+      *Image of no support agent available*
+
+      We use `Twilio.Device.presence()` to update this message when the
+      support agent's availability changes.
 
       ---
 
@@ -198,8 +292,21 @@
     :markdown
       ## Where to next?
 
-      - Wrap up text
-      - Link to other tutorials:
-        - [Click to call](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
-        - [Automated Survey](https://www.twilio.com/docs/howto/walkthrough/automated-survey/python/django)
-      - Tweet us with feedback - https://twitter.com/twilio
+      That's it! Our Django application now powers browser-to-phone and
+      browser-to-browser calls using Twilio Client.
+
+      If you're a Python developer working with Twilio, you might also enjoy these
+      tutorials:
+
+      [**Click-To-Call (Flask)**](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
+
+      Put a button on your web page that connects visitors to live support or sales people via telephone.
+
+      [**Automated Survey (Django)**](https://www.twilio.com/docs/howto/walkthrough/automated-survey/python/django)
+
+      Instantly collect structured data from your users with a survey conducted
+      over a voice call or SMS text messages.
+
+      Thanks for checking out this tutorial! If you have any feedback to share
+      with us, we'd love to hear it. Tweet [@twilio](https://twitter.com/twilio)
+      to let us know what you think.
