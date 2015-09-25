@@ -32,14 +32,16 @@ def support_dashboard(request):
 
 def get_token(request):
     """Returns a Twilio Client token"""
+    # Create a TwilioCapability object with our Twilio API credentials
     capability = TwilioCapability(
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN)
 
+    # Allow our users to make outgoing calls with Twilio Client
     capability.allow_client_outgoing(settings.TWIML_APPLICATION_SID)
 
     # If the user is on the support dashboard page, we allow them to accept
-    # incoming calls to "support_user"
+    # incoming calls to "support_agent"
     # (in a real app we would also require the user to be authenticated)
     if request.GET['forPage'] == reverse('dashboard'):
         capability.allow_client_incoming('support_agent')
@@ -47,6 +49,7 @@ def get_token(request):
         # Otherwise we give them a name of "customer"
         capability.allow_client_incoming('customer')
 
+    # Generate the capability token
     token = capability.generate()
 
     return JsonResponse({'token': token})
