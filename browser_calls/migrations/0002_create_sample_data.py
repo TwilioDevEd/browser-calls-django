@@ -9,14 +9,15 @@ def create_sample_data(apps, schema_editor):
     SupportTicket = apps.get_model('browser_calls', 'SupportTicket')
 
     SupportTicket.objects.create(
-        name='John Woodger',
-        phone_number='+15712812415',
-        description='The mallet you sold me broke! (By the way, my number works)')
+        name='Charles Holdsworth',
+        phone_number='+14153674129',
+        description="I played for Middlesex in the championships and my \
+        mallet squeaked the whole time! I demand a refund!")
 
     SupportTicket.objects.create(
-        name='Charles Holdsworth',
-        phone_number='+15555555555',
-        description='[I will come up with some other jokes to go here]')
+        name='John Woodger',
+        phone_number='+15712812415',
+        description='The mallet you sold me broke! Call me immediately!')
 
 
 class Migration(migrations.Migration):
