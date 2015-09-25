@@ -3,30 +3,45 @@
     :markdown
       ## What does this thing do?
 
-      - Brief overview of app
+      - Brief overview of app [Django](http://djangoproject.com/)
       - Links to README
       - Include screenshot of home page
+
+      ---
+
+      **See also:**
+
+      * [Twilio Python Helper Library](https://github.com/twilio/twilio-python/)
+      * [Twilio Client docs](https://www.twilio.com/docs/client)
+      * [Django docs](https://docs.djangoproject.com/en/1.8/)
 
   .step(data-file='browser_calls/views.py', data-highlight='15-21')
     :markdown
       ## Submit a support ticket
 
-      - Explain use of CreateView class-based view to power support form page
+      - Explain use of [CreateView](https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#createview) class-based view to power support form page
       - Include definition of SupportTicket model as prose code snippet
-      - Include a note about django-phonenumberfield
+      - Include a note about [django-phonenumber-field](https://github.com/stefanfoulis/django-phonenumber-field)
 
       ```
       class SupportTicket(models.Model):
-          """A support ticket submitted by an unsatisfied customer :("""
+          """A support ticket submitted by an unsatisfied customer"""
 
           name = models.CharField(max_length=100)
-          phone_number = PhoneNumberField(help_text='Must include international prefix - e.g. +1 555 555 55555')
-          description = models.TextField(help_text='A description of your problem')
+          phone_number = PhoneNumberField()
+          description = models.TextField()
 
           timestamp = models.DateTimeField(auto_now_add=True)
       ```
 
-  .step(data-file='templates/browser_calls/support_dashboard.html', data-highlight='35-55')
+      ---
+
+      **See also:**
+
+      * [Django Class-based views](https://docs.djangoproject.com/en/1.8/topics/class-based-views/)
+      * [Django Models](https://docs.djangoproject.com/en/1.8/topics/db/models/)
+
+  .step(data-file='templates/browser_calls/support_dashboard.html', data-highlight='35-58')
     :markdown
       ## The support dashboard
 
@@ -41,13 +56,28 @@
       - Generating a capability token server-side is the first step to using Twilio Client
       - Discuss `allow_client_outgoing` and `allow_client_incoming` methods
 
+      ---
+
+      **See also:**
+
+      * [Twilio Client: Capability Tokens](https://www.twilio.com/docs/client/capability-tokens)
+      * [Generate Capability Tokens with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/token-generation.html)
+
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='18-29')
     :markdown
       ## Set up Twilio Client
 
       - Discuss hitting our AJAX view to generate the capability token
       - And then passing that token to `Twilio.Device.setup()`
-      - Also mention the `.ready()` callback (and maybe the `.error()` callback)
+      - Also mention the [.ready()](https://www.twilio.com/docs/client/device#ready)
+      callback (and maybe the [.error()](https://www.twilio.com/docs/client/device#error) callback)
+
+      ---
+
+      **See also:**
+
+      * [jQuery `.get()`](https://api.jquery.com/jquery.get/)
+      * [Twilio Device.setup()](https://www.twilio.com/docs/client/device#setup)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='91-97')
     :markdown
@@ -55,6 +85,12 @@
 
       - Discuss Twilio.Device.connect()
       - Explain why we pass `params` and how they end up in the `call` view
+
+      ---
+
+      **See also:**
+
+      * [Twilio Device.connect()](https://www.twilio.com/docs/client/device#connect)
 
   .step(data-file='browser_calls/views.py', data-highlight='55-64, 70')
     :markdown
@@ -64,12 +100,26 @@
       - Highlight how our `phoneNumber` param appears in the POST request
       - Explain that requiring server-side TwiML is a security/abuse prevention feature (I assume?)
 
+      ---
+
+      **See also:**
+
+      * [<Number> TwiML noun](https://www.twilio.com/docs/api/twiml/number)
+      * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
+
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='47-63')
     :markdown
       ## Complete the connection
 
       - Twilio has now connected the call
       - Discuss the `.connect()` callback - used to update UI elements
+
+      ---
+
+      **See also:**
+
+      * [Twilio Device.connect() callback](https://www.twilio.com/docs/client/device#connect-handler)
+      * [jQuery .prop() docs](http://api.jquery.com/prop/)
 
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='99-105')
     :markdown
@@ -78,6 +128,12 @@
       - Include screenshot of homepage "Talk to support now pane"
       - Mention use of `.connect()` again, but without parameters because
       our backend will assume this is a call for the support client
+
+      ---
+
+      **See also:**
+
+      * [Twilio Device.connect()](https://www.twilio.com/docs/client/device#connect)
 
   .step(data-file='browser_calls/views.py', data-highlight='55-70, 33-34, 41-45')
     :markdown
@@ -88,6 +144,13 @@
       - Our `call` view generates TwiML connecting the call to the `support_agent`
       client device
 
+      ---
+
+      **See also:**
+
+      * [<Client> TwiML noun](https://www.twilio.com/docs/api/twiml/client)
+      * [Allow Incoming Connections on Capability Tokens](https://www.twilio.com/docs/client/capability-tokens#allow-incoming-connections)
+
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='75-89')
     :markdown
       ## Answer the call
@@ -96,6 +159,28 @@
       - Explain the `.answer()` callback and setting an anonymous click function
       on the `answerButton` element
 
+      ---
+
+      **See also:**
+
+      * [Twilio Client .incoming()](https://www.twilio.com/docs/client/device#incoming)
+      * [Twilio Client .answer()](https://www.twilio.com/docs/client/connection#accept)
+
+  .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='107-110, 65-73')
+    :markdown
+      ## End a call
+
+      - Simply call out `Twilio.Device.disconnectAll()`
+      - And the disconnect callback
+
+      ---
+
+      **See also:**
+
+      https://www.twilio.com/docs/client/device#disconnect-all
+      https://www.twilio.com/docs/client/device#disconnect
+      * [jQuery .prop() docs](http://api.jquery.com/prop/)
+
   .step(data-file='browser_calls/static/js/browser-calls.js', data-highlight='36-45')
     :markdown
       ## Check if a support agent is available
@@ -103,12 +188,18 @@
       - One sentence about why seeing if support is online is useful
       - Discuss use of `.presence()` callback to implement this feature
 
+      ---
+
+      **See also:**
+
+      * [Twilio Client .presence()](https://www.twilio.com/docs/client/device#presence)
+
   .step
     :markdown
       ## Where to next?
 
       - Wrap up text
       - Link to other tutorials:
-        - Click to call
-        - Automated Survey
-      - Tweet us with feedback
+        - [Click to call](https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask)
+        - [Automated Survey](https://www.twilio.com/docs/howto/walkthrough/automated-survey/python/django)
+      - Tweet us with feedback - https://twitter.com/twilio

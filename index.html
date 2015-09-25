@@ -11,25 +11,38 @@
   width:100%;
 }</style><link rel="shortcut icon" href="//twilio.com/bundles/marketing/img/favicons/favicon.ico"><link rel="apple-touch-icon" href="//twilio.com/bundles/marketing/img/favicons/favicon_57.png"><link rel="apple-touch-icon" sizes="72x72" href="//twilio.com/bundles/marketing/img/favicons/favicon_72.png"><link rel="apple-touch-icon" sizes="114x114" href="//twilio.com/bundles/marketing/img/favicons/favicon_114.png"><link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"><link rel="stylesheet" href="viewsaurus.css"></head><body><div class="wrapper"><div id="viewsaurus" data-title="Browser Calls"><div class="saurus-panes"><div class="saurus-prose"><div class="saurus-prose-header"><div class="title-outer"><span class="step-title">Browser Calls</span></div></div><div class="saurus-nav-buttons"><div class="saurus-nav-button nav-overview"><div class="saurus-nav-button-inner"><i class="fa fa-fw fa-list"></i></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-previous"><div class="saurus-nav-button-inner"><a href=""> <i class="fa fa-fw fa-play fa-rotate-180"></i></a></div><div class="nav-divider"></div></div><div class="saurus-nav-button nav-next clickable"><div class="saurus-nav-button-inner"><a href="#1"> <i class="fa fa-fw fa-play"></i></a></div></div><div class="saurus-next-title"><span class="next-title-inner"></span></div></div><div class="saurus-progress-bar"></div><div class="saurus-start"><p>Learn how to use Twilio Client to make browser-to-phone and browser-to-browser calls with ease. The unsatisfied customers of the Birchwood Bicycle Polo Co. need your help!</p><a href="#0">Start Tutorial</a></div><div class="saurus-content"><div data-title="Browser Calls with Twilio and Django" class="chapter"><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="91-105" class="step"><h2 id="what-does-this-thing-do-">What does this thing do?</h2>
 <ul>
-<li>Brief overview of app</li>
+<li>Brief overview of app <a href="http://djangoproject.com/">Django</a></li>
 <li>Links to README</li>
 <li>Include screenshot of home page</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://github.com/twilio/twilio-python/">Twilio Python Helper Library</a></li>
+<li><a href="https://www.twilio.com/docs/client">Twilio Client docs</a></li>
+<li><a href="https://docs.djangoproject.com/en/1.8/">Django docs</a></li>
+</ul>
 </div><div data-file="browser_calls/views.py" data-highlight="15-21" class="step"><h2 id="submit-a-support-ticket">Submit a support ticket</h2>
 <ul>
-<li>Explain use of CreateView class-based view to power support form page</li>
+<li>Explain use of <a href="https://docs.djangoproject.com/en/1.8/ref/class-based-views/generic-editing/#createview">CreateView</a> class-based view to power support form page</li>
 <li>Include definition of SupportTicket model as prose code snippet</li>
-<li>Include a note about django-phonenumberfield</li>
+<li>Include a note about <a href="https://github.com/stefanfoulis/django-phonenumber-field">django-phonenumber-field</a></li>
 </ul>
 <pre><code>class SupportTicket(models.Model):
-    &quot;&quot;&quot;A support ticket submitted by an unsatisfied customer :(&quot;&quot;&quot;
+    &quot;&quot;&quot;A support ticket submitted by an unsatisfied customer&quot;&quot;&quot;
 
     name = models.CharField(max_length=100)
-    phone_number = PhoneNumberField(help_text=&#39;Must include international prefix - e.g. +1 555 555 55555&#39;)
-    description = models.TextField(help_text=&#39;A description of your problem&#39;)
+    phone_number = PhoneNumberField()
+    description = models.TextField()
 
     timestamp = models.DateTimeField(auto_now_add=True)
-</code></pre></div><div data-file="templates/browser_calls/support_dashboard.html" data-highlight="35-55" class="step"><h2 id="the-support-dashboard">The support dashboard</h2>
+</code></pre><hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://docs.djangoproject.com/en/1.8/topics/class-based-views/">Django Class-based views</a></li>
+<li><a href="https://docs.djangoproject.com/en/1.8/topics/db/models/">Django Models</a></li>
+</ul>
+</div><div data-file="templates/browser_calls/support_dashboard.html" data-highlight="35-58" class="step"><h2 id="the-support-dashboard">The support dashboard</h2>
 <ul>
 <li>Explain how the support dashboard displays each SupportTicket</li>
 <li>In addition to a &quot;Call Customer&quot; button which uses the phone_number from
@@ -40,16 +53,34 @@ the ticket as the argument to the callCustomer function</li>
 <li>Generating a capability token server-side is the first step to using Twilio Client</li>
 <li>Discuss <code>allow_client_outgoing</code> and <code>allow_client_incoming</code> methods</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/capability-tokens">Twilio Client: Capability Tokens</a></li>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/token-generation.html">Generate Capability Tokens with twilio-python</a></li>
+</ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="18-29" class="step"><h2 id="set-up-twilio-client">Set up Twilio Client</h2>
 <ul>
 <li>Discuss hitting our AJAX view to generate the capability token</li>
 <li>And then passing that token to <code>Twilio.Device.setup()</code></li>
-<li>Also mention the <code>.ready()</code> callback (and maybe the <code>.error()</code> callback)</li>
+<li>Also mention the <a href="https://www.twilio.com/docs/client/device#ready">.ready()</a>
+callback (and maybe the <a href="https://www.twilio.com/docs/client/device#error">.error()</a> callback)</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://api.jquery.com/jquery.get/">jQuery <code>.get()</code></a></li>
+<li><a href="https://www.twilio.com/docs/client/device#setup">Twilio Device.setup()</a></li>
 </ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="91-97" class="step"><h2 id="call-a-customer-browser-to-phone-">Call a customer (browser-to-phone)</h2>
 <ul>
 <li>Discuss Twilio.Device.connect()</li>
 <li>Explain why we pass <code>params</code> and how they end up in the <code>call</code> view</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/device#connect">Twilio Device.connect()</a></li>
 </ul>
 </div><div data-file="browser_calls/views.py" data-highlight="55-64, 70" class="step"><h2 id="connect-the-call-to-a-phone-number">Connect the call to a phone number</h2>
 <ul>
@@ -57,16 +88,33 @@ the ticket as the argument to the callCustomer function</li>
 <li>Highlight how our <code>phoneNumber</code> param appears in the POST request</li>
 <li>Explain that requiring server-side TwiML is a security/abuse prevention feature (I assume?)</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/api/twiml/number">&lt;Number&gt; TwiML noun</a></li>
+<li><a href="https://twilio-python.readthedocs.org/en/latest/usage/twiml.html">TwiML creation with twilio-python</a></li>
+</ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="47-63" class="step"><h2 id="complete-the-connection">Complete the connection</h2>
 <ul>
 <li>Twilio has now connected the call</li>
 <li>Discuss the <code>.connect()</code> callback - used to update UI elements</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/device#connect-handler">Twilio Device.connect() callback</a></li>
+<li><a href="http://api.jquery.com/prop/">jQuery .prop() docs</a></li>
 </ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="99-105" class="step"><h2 id="call-a-support-agent-browser-to-browser-">Call a support agent (browser-to-browser)</h2>
 <ul>
 <li>Include screenshot of homepage &quot;Talk to support now pane&quot;</li>
 <li>Mention use of <code>.connect()</code> again, but without parameters because
 our backend will assume this is a call for the support client</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/device#connect">Twilio Device.connect()</a></li>
 </ul>
 </div><div data-file="browser_calls/views.py" data-highlight="55-70, 33-34, 41-45" class="step"><h2 id="connect-the-call-to-the-support-client">Connect the call to the support client</h2>
 <ul>
@@ -75,30 +123,59 @@ we generated their capability token</li>
 <li>Our <code>call</code> view generates TwiML connecting the call to the <code>support_agent</code>
 client device</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/api/twiml/client">&lt;Client&gt; TwiML noun</a></li>
+<li><a href="https://www.twilio.com/docs/client/capability-tokens#allow-incoming-connections">Allow Incoming Connections on Capability Tokens</a></li>
+</ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="75-89" class="step"><h2 id="answer-the-call">Answer the call</h2>
 <ul>
 <li>Discuss the <code>.incoming()</code> callback for handling incoming calls</li>
 <li>Explain the <code>.answer()</code> callback and setting an anonymous click function
 on the <code>answerButton</code> element</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/device#incoming">Twilio Client .incoming()</a></li>
+<li><a href="https://www.twilio.com/docs/client/connection#accept">Twilio Client .answer()</a></li>
+</ul>
+</div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="107-110, 65-73" class="step"><h2 id="end-a-call">End a call</h2>
+<ul>
+<li>Simply call out <code>Twilio.Device.disconnectAll()</code></li>
+<li>And the disconnect callback</li>
+</ul>
+<hr>
+<p><strong>See also:</strong></p>
+<p><a href="https://www.twilio.com/docs/client/device#disconnect-all">https://www.twilio.com/docs/client/device#disconnect-all</a>
+<a href="https://www.twilio.com/docs/client/device#disconnect">https://www.twilio.com/docs/client/device#disconnect</a></p>
+<ul>
+<li><a href="http://api.jquery.com/prop/">jQuery .prop() docs</a></li>
+</ul>
 </div><div data-file="browser_calls/static/js/browser-calls.js" data-highlight="36-45" class="step"><h2 id="check-if-a-support-agent-is-available">Check if a support agent is available</h2>
 <ul>
 <li>One sentence about why seeing if support is online is useful</li>
 <li>Discuss use of <code>.presence()</code> callback to implement this feature</li>
 </ul>
+<hr>
+<p><strong>See also:</strong></p>
+<ul>
+<li><a href="https://www.twilio.com/docs/client/device#presence">Twilio Client .presence()</a></li>
+</ul>
 </div><div class="step"><h2 id="where-to-next-">Where to next?</h2>
 <ul>
 <li>Wrap up text</li>
 <li>Link to other tutorials:<ul>
-<li>Click to call</li>
-<li>Automated Survey</li>
+<li><a href="https://www.twilio.com/docs/howto/walkthrough/click-to-call/python/flask">Click to call</a></li>
+<li><a href="https://www.twilio.com/docs/howto/walkthrough/automated-survey/python/django">Automated Survey</a></li>
 </ul>
 </li>
-<li>Tweet us with feedback</li>
+<li>Tweet us with feedback - <a href="https://twitter.com/twilio">https://twitter.com/twilio</a></li>
 </ul>
 </div></div>
 <div class="saurus-files" style="display:none;"><textarea class="saurus-file" data-file="browser_calls/static/js/browser-calls.js" data-mode="javascript">LyoqCiAqIFR3aWxpbyBDbGllbnQgY29uZmlndXJhdGlvbiBmb3IgdGhlIGJyb3dzZXItY2FsbHMtZGphbmdvCiAqIGV4YW1wbGUgYXBwbGljYXRpb24uCiAqLwoKLy8gU3RvcmUgc29tZSBzZWxlY3RvcnMgZm9yIGVsZW1lbnRzIHdlJ2xsIHJldXNlCnZhciBjYWxsU3RhdHVzID0gJCgiI2NhbGwtc3RhdHVzIik7CnZhciBhbnN3ZXJCdXR0b24gPSAkKCIuYW5zd2VyLWJ1dHRvbiIpOwp2YXIgY2FsbFN1cHBvcnRCdXR0b24gPSAkKCIuY2FsbC1zdXBwb3J0LWJ1dHRvbiIpOwp2YXIgaGFuZ1VwQnV0dG9uID0gJCgiLmhhbmd1cC1idXR0b24iKTsKdmFyIGNhbGxDdXN0b21lckJ1dHRvbnMgPSAkKCIuY2FsbC1jdXN0b21lci1idXR0b24iKTsKCi8qIEhlbHBlciBmdW5jdGlvbiB0byB1cGRhdGUgdGhlIGNhbGwgc3RhdHVzIGJhciAqLwpmdW5jdGlvbiB1cGRhdGVDYWxsU3RhdHVzKHN0YXR1cykgewogICAgY2FsbFN0YXR1cy50ZXh0KHN0YXR1cyk7Cn0KCi8qIEdldCBhIFR3aWxpbyBDbGllbnQgdG9rZW4gd2l0aCBhbiBBSkFYIHJlcXVlc3QgKi8KJChkb2N1bWVudCkucmVhZHkoZnVuY3Rpb24oKSB7CiAgICAkLmdldCgiL3N1cHBvcnQvdG9rZW4iLCB7Zm9yUGFnZTogd2luZG93LmxvY2F0aW9uLnBhdGhuYW1lfSwgZnVuY3Rpb24oZGF0YSkgewogICAgICAgIC8vIFNldCB1cCB0aGUgVHdpbGlvIENsaWVudCBEZXZpY2Ugd2l0aCB0aGUgdG9rZW4KICAgICAgICBUd2lsaW8uRGV2aWNlLnNldHVwKGRhdGEudG9rZW4pOwogICAgfSk7Cn0pOwoKLyogQ2FsbGJhY2sgdG8gbGV0IHVzIGtub3cgVHdpbGlvIENsaWVudCBpcyByZWFkeSAqLwpUd2lsaW8uRGV2aWNlLnJlYWR5KGZ1bmN0aW9uIChkZXZpY2UpIHsKICAgIHVwZGF0ZUNhbGxTdGF0dXMoIlJlYWR5Iik7Cn0pOwoKLyogUmVwb3J0IGFueSBlcnJvcnMgdG8gdGhlIGNhbGwgc3RhdHVzIGRpc3BsYXkgKi8KVHdpbGlvLkRldmljZS5lcnJvcihmdW5jdGlvbiAoZXJyb3IpIHsKICAgIHVwZGF0ZUNhbGxTdGF0dXMoIkVSUk9SOiAiICsgZXJyb3IubWVzc2FnZSk7Cn0pOwoKLyogQ2FsbGJhY2sgdG8gZGV0ZXJtaW5lIGlmICJzdXBwb3J0X2FnZW50IiBpcyBhdmFpbGFibGUgb3Igbm90ICovClR3aWxpby5EZXZpY2UucHJlc2VuY2UoZnVuY3Rpb24ocHJlc2VuY2VFdmVudCkgewogICAgaWYgKHByZXNlbmNlRXZlbnQuZnJvbSA9PT0gJ3N1cHBvcnRfYWdlbnQnKSB7CiAgICAgICAgaWYgKHByZXNlbmNlRXZlbnQuYXZhaWxhYmxlKSB7CiAgICAgICAgICAgICQoIiNzdXBwb3J0LXVuYXZhaWxhYmxlIikuaGlkZSgpOwogICAgICAgIH0gZWxzZSB7CiAgICAgICAgICAgICQoIiNzdXBwb3J0LXVuYXZhaWxhYmxlIikuc2hvdygpOwogICAgICAgIH0KICAgIH0KfSk7CgovKiBDYWxsYmFjayBmb3Igd2hlbiBUd2lsaW8gQ2xpZW50IGluaXRpYXRlcyBhIG5ldyBjb25uZWN0aW9uICovClR3aWxpby5EZXZpY2UuY29ubmVjdChmdW5jdGlvbiAoY29ubmVjdGlvbikgewogICAgLy8gRW5hYmxlIHRoZSBoYW5nIHVwIGJ1dHRvbiBhbmQgZGlzYWJsZSB0aGUgY2FsbCBidXR0b25zCiAgICBoYW5nVXBCdXR0b24ucHJvcCgiZGlzYWJsZWQiLCBmYWxzZSk7CiAgICBjYWxsQ3VzdG9tZXJCdXR0b25zLnByb3AoImRpc2FibGVkIiwgdHJ1ZSk7CiAgICBjYWxsU3VwcG9ydEJ1dHRvbi5wcm9wKCJkaXNhYmxlZCIsIHRydWUpOwogICAgYW5zd2VyQnV0dG9uLnByb3AoImRpc2FibGVkIiwgdHJ1ZSk7CgogICAgLy8gSWYgcGhvbmVOdW1iZXIgaXMgcGFydCBvZiB0aGUgY29ubmVjdGlvbiwgdGhpcyBpcyBhIGNhbGwgZnJvbSBhCiAgICAvLyBzdXBwb3J0IGFnZW50IHRvIGEgY3VzdG9tZXIncyBwaG9uZQogICAgaWYgKCJwaG9uZU51bWJlciIgaW4gY29ubmVjdGlvbi5tZXNzYWdlKSB7CiAgICAgICAgdXBkYXRlQ2FsbFN0YXR1cygiSW4gY2FsbCB3aXRoICIgKyBjb25uZWN0aW9uLm1lc3NhZ2UucGhvbmVOdW1iZXIpOwogICAgfSBlbHNlIHsKICAgICAgICAvLyBUaGlzIGlzIGEgY2FsbCBmcm9tIGEgd2Vic2l0ZSB1c2VyIHRvIGEgc3VwcG9ydCBhZ2VudAogICAgICAgIHVwZGF0ZUNhbGxTdGF0dXMoIkluIGNhbGwgd2l0aCBzdXBwb3J0Iik7CiAgICB9Cn0pOwoKLyogQ2FsbGJhY2sgZm9yIHdoZW4gYSBjYWxsIGVuZHMgKi8KVHdpbGlvLkRldmljZS5kaXNjb25uZWN0KGZ1bmN0aW9uKGNvbm5lY3Rpb24pIHsKICAgIC8vIERpc2FibGUgdGhlIGhhbmd1cCBidXR0b24gYW5kIGVuYWJsZSB0aGUgY2FsbCBidXR0b25zCiAgICBoYW5nVXBCdXR0b24ucHJvcCgiZGlzYWJsZWQiLCB0cnVlKTsKICAgIGNhbGxDdXN0b21lckJ1dHRvbnMucHJvcCgiZGlzYWJsZWQiLCBmYWxzZSk7CiAgICBjYWxsU3VwcG9ydEJ1dHRvbi5wcm9wKCJkaXNhYmxlZCIsIGZhbHNlKTsKCiAgICB1cGRhdGVDYWxsU3RhdHVzKCJSZWFkeSIpOwp9KTsKCi8qIENhbGxiYWNrIGZvciB3aGVuIFR3aWxpbyBDbGllbnQgcmVjZWl2ZXMgYSBuZXcgaW5jb21pbmcgY2FsbCAqLwpUd2lsaW8uRGV2aWNlLmluY29taW5nKGZ1bmN0aW9uKGNvbm5lY3Rpb24pIHsKICAgIHVwZGF0ZUNhbGxTdGF0dXMoIkluY29taW5nIHN1cHBvcnQgY2FsbCIpOwoKICAgIC8vIFNldCBhIGNhbGxiYWNrIHRvIGJlIGV4ZWN1dGVkIHdoZW4gdGhlIGNvbm5lY3Rpb24gaXMgYWNjZXB0ZWQKICAgIGNvbm5lY3Rpb24uYWNjZXB0KGZ1bmN0aW9uKCkgewogICAgICAgIHVwZGF0ZUNhbGxTdGF0dXMoIkluIGNhbGwgd2l0aCBjdXN0b21lciIpOwogICAgfSk7CgogICAgLy8gU2V0IGEgY2FsbGJhY2sgb24gdGhlIGFuc3dlciBidXR0b24gYW5kIGVuYWJsZSBpdAogICAgYW5zd2VyQnV0dG9uLmNsaWNrKGZ1bmN0aW9uKCkgewogICAgICAgIGNvbm5lY3Rpb24uYWNjZXB0KCk7CiAgICB9KTsKICAgIGFuc3dlckJ1dHRvbi5wcm9wKCJkaXNhYmxlZCIsIGZhbHNlKTsKfSk7CgovKiBDYWxsIGEgY3VzdG9tZXIgZnJvbSBhIHN1cHBvcnQgdGlja2V0ICovCmZ1bmN0aW9uIGNhbGxDdXN0b21lcihwaG9uZU51bWJlcikgewogICAgdXBkYXRlQ2FsbFN0YXR1cygiQ2FsbGluZyAiICsgcGhvbmVOdW1iZXIgKyAiLi4uIik7CgogICAgdmFyIHBhcmFtcyA9IHsicGhvbmVOdW1iZXIiOiBwaG9uZU51bWJlcn07CiAgICBUd2lsaW8uRGV2aWNlLmNvbm5lY3QocGFyYW1zKTsKfQoKLyogQ2FsbCB0aGUgc3VwcG9ydF9hZ2VudCBmcm9tIHRoZSBob21lIHBhZ2UgKi8KZnVuY3Rpb24gY2FsbFN1cHBvcnQoKSB7CiAgICB1cGRhdGVDYWxsU3RhdHVzKCJDYWxsaW5nIHN1cHBvcnQuLi4iKTsKCiAgICAvLyBPdXIgYmFja2VuZCB3aWxsIGFzc3VtZSB0aGF0IG5vIHBhcmFtcyBtZWFucyBhIGNhbGwgdG8gc3VwcG9ydF9hZ2VudAogICAgVHdpbGlvLkRldmljZS5jb25uZWN0KCk7Cn0KCi8qIEVuZCBhIGNhbGwgKi8KZnVuY3Rpb24gaGFuZ1VwKCkgewogICAgVHdpbGlvLkRldmljZS5kaXNjb25uZWN0QWxsKCk7Cn0K</textarea>
 <textarea class="saurus-file" data-file="browser_calls/views.py" data-mode="python">ZnJvbSBkamFuZ28uY29uZiBpbXBvcnQgc2V0dGluZ3MKZnJvbSBkamFuZ28uY29udHJpYiBpbXBvcnQgbWVzc2FnZXMKZnJvbSBkamFuZ28uY29udHJpYi5tZXNzYWdlcy52aWV3cyBpbXBvcnQgU3VjY2Vzc01lc3NhZ2VNaXhpbgpmcm9tIGRqYW5nby5jb3JlLnVybHJlc29sdmVycyBpbXBvcnQgcmV2ZXJzZSwgcmV2ZXJzZV9sYXp5CmZyb20gZGphbmdvLmh0dHAgaW1wb3J0IEh0dHBSZXNwb25zZSwgSnNvblJlc3BvbnNlCmZyb20gZGphbmdvLnNob3J0Y3V0cyBpbXBvcnQgcmVuZGVyLCByZWRpcmVjdApmcm9tIGRqYW5nby52aWV3cy5kZWNvcmF0b3JzLmNzcmYgaW1wb3J0IGNzcmZfZXhlbXB0CmZyb20gZGphbmdvLnZpZXdzLmdlbmVyaWMgaW1wb3J0IENyZWF0ZVZpZXcKZnJvbSB0d2lsaW8gaW1wb3J0IHR3aW1sCmZyb20gdHdpbGlvLnV0aWwgaW1wb3J0IFR3aWxpb0NhcGFiaWxpdHkKCmZyb20gLm1vZGVscyBpbXBvcnQgU3VwcG9ydFRpY2tldAoKCmNsYXNzIFN1cHBvcnRUaWNrZXRDcmVhdGUoU3VjY2Vzc01lc3NhZ2VNaXhpbiwgQ3JlYXRlVmlldyk6CiAgICAiIiJSZW5kZXJzIHRoZSBob21lIHBhZ2UgYW5kIHRoZSBzdXBwb3J0IHRpY2tldCBmb3JtIiIiCiAgICBtb2RlbCA9IFN1cHBvcnRUaWNrZXQKICAgIGZpZWxkcyA9IFsnbmFtZScsICdwaG9uZV9udW1iZXInLCAnZGVzY3JpcHRpb24nXQogICAgdGVtcGxhdGVfbmFtZSA9ICdpbmRleC5odG1sJwogICAgc3VjY2Vzc191cmwgPSByZXZlcnNlX2xhenkoJ2hvbWUnKQogICAgc3VjY2Vzc19tZXNzYWdlID0gIllvdXIgdGlja2V0IHdhcyBzdWJtaXR0ZWQhIEFuIGFnZW50IHdpbGwgY2FsbCB5b3Ugc29vbi4iCgoKZGVmIHN1cHBvcnRfZGFzaGJvYXJkKHJlcXVlc3QpOgogICAgIiIiU2hvd3MgdGhlIGxpc3Qgb2Ygc3VwcG9ydCB0aWNrZXRzIHRvIGEgc3VwcG9ydCBhZ2VudCIiIgogICAgY29udGV4dCA9IHt9CgogICAgY29udGV4dFsnc3VwcG9ydF90aWNrZXRzJ10gPSBTdXBwb3J0VGlja2V0Lm9iamVjdHMub3JkZXJfYnkoJy10aW1lc3RhbXAnKQoKICAgIHJldHVybiByZW5kZXIocmVxdWVzdCwgJ2Jyb3dzZXJfY2FsbHMvc3VwcG9ydF9kYXNoYm9hcmQuaHRtbCcsIGNvbnRleHQpCgoKZGVmIGdldF90b2tlbihyZXF1ZXN0KToKICAgICIiIlJldHVybnMgYSBUd2lsaW8gQ2xpZW50IHRva2VuIiIiCiAgICBjYXBhYmlsaXR5ID0gVHdpbGlvQ2FwYWJpbGl0eSgKICAgICAgICBzZXR0aW5ncy5UV0lMSU9fQUNDT1VOVF9TSUQsCiAgICAgICAgc2V0dGluZ3MuVFdJTElPX0FVVEhfVE9LRU4pCgogICAgY2FwYWJpbGl0eS5hbGxvd19jbGllbnRfb3V0Z29pbmcoc2V0dGluZ3MuVFdJTUxfQVBQTElDQVRJT05fU0lEKQoKICAgICMgSWYgdGhlIHVzZXIgaXMgb24gdGhlIHN1cHBvcnQgZGFzaGJvYXJkIHBhZ2UsIHdlIGFsbG93IHRoZW0gdG8gYWNjZXB0CiAgICAjIGluY29taW5nIGNhbGxzIHRvICJzdXBwb3J0X3VzZXIiCiAgICAjIChpbiBhIHJlYWwgYXBwIHdlIHdvdWxkIGFsc28gcmVxdWlyZSB0aGUgdXNlciB0byBiZSBhdXRoZW50aWNhdGVkKQogICAgaWYgcmVxdWVzdC5HRVRbJ2ZvclBhZ2UnXSA9PSByZXZlcnNlKCdkYXNoYm9hcmQnKToKICAgICAgICBjYXBhYmlsaXR5LmFsbG93X2NsaWVudF9pbmNvbWluZygnc3VwcG9ydF9hZ2VudCcpCiAgICBlbHNlOgogICAgICAgICMgT3RoZXJ3aXNlIHdlIGdpdmUgdGhlbSBhIG5hbWUgb2YgImN1c3RvbWVyIgogICAgICAgIGNhcGFiaWxpdHkuYWxsb3dfY2xpZW50X2luY29taW5nKCdjdXN0b21lcicpCgogICAgdG9rZW4gPSBjYXBhYmlsaXR5LmdlbmVyYXRlKCkKCiAgICByZXR1cm4gSnNvblJlc3BvbnNlKHsndG9rZW4nOiB0b2tlbn0pCgoKQGNzcmZfZXhlbXB0CmRlZiBjYWxsKHJlcXVlc3QpOgogICAgIiIiUmV0dXJucyBUd2lNTCBpbnN0cnVjdGlvbnMgdG8gVHdpbGlvJ3MgUE9TVCByZXF1ZXN0cyIiIgogICAgcmVzcG9uc2UgPSB0d2ltbC5SZXNwb25zZSgpCgogICAgd2l0aCByZXNwb25zZS5kaWFsKGNhbGxlcklkPXNldHRpbmdzLlRXSUxJT19OVU1CRVIpIGFzIHI6CiAgICAgICAgIyBJZiB0aGUgYnJvd3NlciBzZW50IGEgcGhvbmVOdW1iZXIgcGFyYW0sIHdlIGtub3cgdGhpcyByZXF1ZXN0CiAgICAgICAgIyBpcyBhIHN1cHBvcnQgYWdlbnQgdHJ5aW5nIHRvIGNhbGwgYSBjdXN0b21lcidzIHBob25lCiAgICAgICAgaWYgJ3Bob25lTnVtYmVyJyBpbiByZXF1ZXN0LlBPU1Q6CiAgICAgICAgICAgIHIubnVtYmVyKHJlcXVlc3QuUE9TVFsncGhvbmVOdW1iZXInXSkKICAgICAgICBlbHNlOgogICAgICAgICAgICAjIE90aGVyd2lzZSB3ZSBhc3N1bWUgdGhpcyByZXF1ZXN0IGlzIGEgY3VzdG9tZXIgdHJ5aW5nCiAgICAgICAgICAgICMgdG8gY29udGFjdCBzdXBwb3J0IGZyb20gdGhlIGhvbWUgcGFnZQogICAgICAgICAgICByLmNsaWVudCgnc3VwcG9ydF9hZ2VudCcpCgogICAgcmV0dXJuIEh0dHBSZXNwb25zZShzdHIocmVzcG9uc2UpKQo=</textarea>
-<textarea class="saurus-file" data-file="templates/browser_calls/support_dashboard.html" data-mode="html">eyUgZXh0ZW5kcyAiYmFzZS5odG1sIiAlfQoKeyUgbG9hZCBib290c3RyYXBfdGFncyAlfQoKeyUgYmxvY2sgdGl0bGUgJX1TdXBwb3J0IERhc2hib2FyZHslIGVuZGJsb2NrIHRpdGxlICV9Cgp7JSBibG9jayBjb250ZW50ICV9CiAgPGRpdiBjbGFzcz0iY29udGFpbmVyIj4KCiAgICA8aDI+U3VwcG9ydCBUaWNrZXRzPC9oMj4KCiAgICA8cCBjbGFzcz0ibGVhZCI+CiAgICAgIFRoaXMgaXMgdGhlIGxpc3Qgb2YgbW9zdCByZWNlbnQgc3VwcG9ydCB0aWNrZXRzLiBDbGljayB0aGUgIkNhbGwgY3VzdG9tZXIiIGJ1dHRvbiB0byBzdGFydCBhIHBob25lIGNhbGwgZnJvbSB5b3VyIGJyb3dzZXIuCiAgICA8L3A+CgogICAgPGRpdiBjbGFzcz0icm93Ij4KCiAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC00IGNvbC1tZC1wdXNoLTgiPgogICAgICAgIDxkaXYgY2xhc3M9InBhbmVsIHBhbmVsLXByaW1hcnkgY2xpZW50LWNvbnRyb2xzIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLWhlYWRpbmciPgogICAgICAgICAgICA8aDMgY2xhc3M9InBhbmVsLXRpdGxlIj5NYWtlIGEgY2FsbDwvaDM+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLWJvZHkiPgogICAgICAgICAgICA8cD48c3Ryb25nPlN0YXR1czwvc3Ryb25nPjwvcD4KICAgICAgICAgICAgPGRpdiBjbGFzcz0id2VsbCB3ZWxsLXNtIiBpZD0iY2FsbC1zdGF0dXMiPgogICAgICAgICAgICAgIENvbm5lY3RpbmcgdG8gVHdpbGlvLi4uCiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi1sZyBidG4tc3VjY2VzcyBhbnN3ZXItYnV0dG9uIiBkaXNhYmxlZD5BbnN3ZXIgY2FsbDwvYnV0dG9uPgogICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLWxnIGJ0bi1kYW5nZXIgaGFuZ3VwLWJ1dHRvbiIgZGlzYWJsZWQgb25jbGljaz0iaGFuZ1VwKCkiPkhhbmcgdXA8L2J1dHRvbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KCiAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC04IGNvbC1tZC1wdWxsLTQiPgogICAgICAgIHslIGZvciB0aWNrZXQgaW4gc3VwcG9ydF90aWNrZXRzICV9CiAgICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCBwYW5lbC1kZWZhdWx0Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwtaGVhZGluZyI+CiAgICAgICAgICAgICAgPGgzIGNsYXNzPSJwYW5lbC10aXRsZSI+VGlja2V0ICN7eyB0aWNrZXQuaWQgfX0gPHNtYWxsIGNsYXNzPSJwdWxsLXJpZ2h0Ij57eyB0aWNrZXQudGltZXN0YW1wIH19PC9zbWFsbD48L2gzPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwtYm9keSI+CiAgICAgICAgICAgICAgPGRpdiBjbGFzcz0icHVsbC1yaWdodCI+CiAgICAgICAgICAgICAgICA8YnV0dG9uIHR5cGU9ImJ1dHRvbiIgY2xhc3M9ImJ0biBidG4tcHJpbWFyeSBidG4tbGcgY2FsbC1jdXN0b21lci1idXR0b24iIG9uY2xpY2s9ImNhbGxDdXN0b21lcigne3sgdGlja2V0LnBob25lX251bWJlciB9fScpIj4KICAgICAgICAgICAgICAgICAgPHNwYW4gY2xhc3M9ImdseXBoaWNvbiBnbHlwaGljb24tZWFycGhvbmUiIGFyaWEtaGlkZGVuPSJ0cnVlIj48L3NwYW4+ICBDYWxsIGN1c3RvbWVyCiAgICAgICAgICAgICAgICA8L2J1dHRvbj4KICAgICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgICA8cD48c3Ryb25nPk5hbWU6PC9zdHJvbmc+IHt7IHRpY2tldC5uYW1lIH19PC9wPgogICAgICAgICAgICAgIDxwPjxzdHJvbmc+UGhvbmUgbnVtYmVyOjwvc3Ryb25nPiB7eyB0aWNrZXQucGhvbmVfbnVtYmVyLmFzX2ludGVybmF0aW9uYWwgfX08L3A+CiAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgPHA+PHN0cm9uZz5EZXNjcmlwdGlvbjo8L3N0cm9uZz48L3A+CiAgICAgICAgICAgICAge3sgdGlja2V0LmRlc2NyaXB0aW9ufGxpbmVicmVha3MgfX0KICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICB7JSBlbmRmb3IgJX0KICAgICAgPC9kaXY+CgogICAgPC9kaXY+CiAgPC9kaXY+CnslIGVuZGJsb2NrICV9Cg==</textarea>
+<textarea class="saurus-file" data-file="templates/browser_calls/support_dashboard.html" data-mode="html">eyUgZXh0ZW5kcyAiYmFzZS5odG1sIiAlfQoKeyUgbG9hZCBib290c3RyYXBfdGFncyAlfQoKeyUgYmxvY2sgdGl0bGUgJX1TdXBwb3J0IERhc2hib2FyZHslIGVuZGJsb2NrIHRpdGxlICV9Cgp7JSBibG9jayBjb250ZW50ICV9CiAgPGRpdiBjbGFzcz0iY29udGFpbmVyIj4KCiAgICA8aDI+U3VwcG9ydCBUaWNrZXRzPC9oMj4KCiAgICA8cCBjbGFzcz0ibGVhZCI+CiAgICAgIFRoaXMgaXMgdGhlIGxpc3Qgb2YgbW9zdCByZWNlbnQgc3VwcG9ydCB0aWNrZXRzLiBDbGljayB0aGUgIkNhbGwgY3VzdG9tZXIiIGJ1dHRvbiB0byBzdGFydCBhIHBob25lIGNhbGwgZnJvbSB5b3VyIGJyb3dzZXIuCiAgICA8L3A+CgogICAgPGRpdiBjbGFzcz0icm93Ij4KCiAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC00IGNvbC1tZC1wdXNoLTgiPgogICAgICAgIDxkaXYgY2xhc3M9InBhbmVsIHBhbmVsLXByaW1hcnkgY2xpZW50LWNvbnRyb2xzIj4KICAgICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLWhlYWRpbmciPgogICAgICAgICAgICA8aDMgY2xhc3M9InBhbmVsLXRpdGxlIj5NYWtlIGEgY2FsbDwvaDM+CiAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLWJvZHkiPgogICAgICAgICAgICA8cD48c3Ryb25nPlN0YXR1czwvc3Ryb25nPjwvcD4KICAgICAgICAgICAgPGRpdiBjbGFzcz0id2VsbCB3ZWxsLXNtIiBpZD0iY2FsbC1zdGF0dXMiPgogICAgICAgICAgICAgIENvbm5lY3RpbmcgdG8gVHdpbGlvLi4uCiAgICAgICAgICAgIDwvZGl2PgoKICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuIGJ0bi1sZyBidG4tc3VjY2VzcyBhbnN3ZXItYnV0dG9uIiBkaXNhYmxlZD5BbnN3ZXIgY2FsbDwvYnV0dG9uPgogICAgICAgICAgICA8YnV0dG9uIGNsYXNzPSJidG4gYnRuLWxnIGJ0bi1kYW5nZXIgaGFuZ3VwLWJ1dHRvbiIgZGlzYWJsZWQgb25jbGljaz0iaGFuZ1VwKCkiPkhhbmcgdXA8L2J1dHRvbj4KICAgICAgICAgIDwvZGl2PgogICAgICAgIDwvZGl2PgogICAgICA8L2Rpdj4KCiAgICAgIDxkaXYgY2xhc3M9ImNvbC1tZC04IGNvbC1tZC1wdWxsLTQiPgogICAgICAgIHslIGZvciB0aWNrZXQgaW4gc3VwcG9ydF90aWNrZXRzICV9CiAgICAgICAgICA8ZGl2IGNsYXNzPSJwYW5lbCBwYW5lbC1kZWZhdWx0Ij4KICAgICAgICAgICAgPGRpdiBjbGFzcz0icGFuZWwtaGVhZGluZyI+CiAgICAgICAgICAgICAgPGgzIGNsYXNzPSJwYW5lbC10aXRsZSI+VGlja2V0ICN7eyB0aWNrZXQuaWQgfX0gPHNtYWxsIGNsYXNzPSJwdWxsLXJpZ2h0Ij57eyB0aWNrZXQudGltZXN0YW1wIH19PC9zbWFsbD48L2gzPgogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgICAgCiAgICAgICAgICAgIDxkaXYgY2xhc3M9InBhbmVsLWJvZHkiPgogICAgICAgICAgICAgIAogICAgICAgICAgICAgIDxkaXYgY2xhc3M9InB1bGwtcmlnaHQiPgogICAgICAgICAgICAgICAgPGJ1dHRvbiBvbmNsaWNrPSJjYWxsQ3VzdG9tZXIoJ3t7IHRpY2tldC5waG9uZV9udW1iZXIgfX0nKSIgdHlwZT0iYnV0dG9uIiBjbGFzcz0iYnRuIGJ0bi1wcmltYXJ5IGJ0bi1sZyBjYWxsLWN1c3RvbWVyLWJ1dHRvbiI+CiAgICAgICAgICAgICAgICAgIDxzcGFuIGNsYXNzPSJnbHlwaGljb24gZ2x5cGhpY29uLWVhcnBob25lIiBhcmlhLWhpZGRlbj0idHJ1ZSI+PC9zcGFuPiAgQ2FsbCBjdXN0b21lcgogICAgICAgICAgICAgICAgPC9idXR0b24+CiAgICAgICAgICAgICAgPC9kaXY+CiAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgPHA+PHN0cm9uZz5OYW1lOjwvc3Ryb25nPiB7eyB0aWNrZXQubmFtZSB9fTwvcD4KICAgICAgICAgICAgICA8cD48c3Ryb25nPlBob25lIG51bWJlcjo8L3N0cm9uZz4ge3sgdGlja2V0LnBob25lX251bWJlci5hc19pbnRlcm5hdGlvbmFsIH19PC9wPgogICAgICAgICAgICAgIDxwPjxzdHJvbmc+RGVzY3JpcHRpb246PC9zdHJvbmc+PC9wPgogICAgICAgICAgICAgIHt7IHRpY2tldC5kZXNjcmlwdGlvbnxsaW5lYnJlYWtzIH19CiAgICAgICAgICAgIAogICAgICAgICAgICA8L2Rpdj4KICAgICAgICAgIDwvZGl2PgogICAgICAgIHslIGVuZGZvciAlfQogICAgICA8L2Rpdj4KCiAgICA8L2Rpdj4KICA8L2Rpdj4KeyUgZW5kYmxvY2sgJX0K</textarea>
 </div>
 </div><div class="saurus-overview"><ul></ul></div></div><div class="saurus-code"><div class="file-path"><span class="crumb-container"></span><i class="fa fa-fw fa-folder"></i></div><div class="saurus-editor"></div></div><div class="saurus-explorer"><div class="saurus-file-list"></div><a href="https://github.com/TwilioDevEd/browser-calls-django" target="_blank" class="explorer-get-code"> <i class="fa fa-lg fa-github-square"> </i>View Code on GitHub</a></div></div></div></div><script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script><script src="ace/ace.js"></script><script src="ace/theme-monokai.js"></script><script src="viewsaurus.js"></script></body></html>
