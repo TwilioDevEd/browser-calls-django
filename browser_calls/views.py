@@ -58,9 +58,9 @@ def get_token(request):
 @csrf_exempt
 def call(request):
     """Returns TwiML instructions to Twilio's POST requests"""
-    response = twiml.Response()
+    twiml = twiml.Response()
 
-    with response.dial(callerId=settings.TWILIO_NUMBER) as r:
+    with twiml.dial(callerId=settings.TWILIO_NUMBER) as r:
         # If the browser sent a phoneNumber param, we know this request
         # is a support agent trying to call a customer's phone
         if 'phoneNumber' in request.POST:
@@ -70,4 +70,4 @@ def call(request):
             # to contact support from the home page
             r.client('support_agent')
 
-    return HttpResponse(str(response))
+    return HttpResponse(str(twiml))
