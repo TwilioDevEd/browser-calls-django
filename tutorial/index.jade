@@ -153,21 +153,19 @@
       ## Connect the call to a phone number
 
       Whenever one of our users makes a call, Twilio will send a POST request to
-      the Voice Request URL we set on our TwiML Application - in this case,
+      the URL we set on our TwiML Application - in this case,
       `/support/call`.
 
       We use [TwiML](https://www.twilio.com/docs/api/twiml) to respond to the
       request and tell Twilio how to handle the call. Twilio will include the
       `phoneNumber` parameter from the previous step in its POST request, which
-      we pass to a 
-      [<Number>](https://www.twilio.com/docs/api/twiml/number) entry
-      in our TwiML.
+      we will then [Dial](https://www.twilio.com/docs/api/twiml/dial) in our TwiML.
 
       ---
 
       **See also:**
 
-      * [<Dial> TwiML verb](https://www.twilio.com/docs/api/twiml/dial)
+      * [<Number> TwiML verb](https://www.twilio.com/docs/api/twiml/number)
       * [TwiML creation with twilio-python](https://twilio-python.readthedocs.org/en/latest/usage/twiml.html)
       * [Django @csrf_exempt decorator](https://docs.djangoproject.com/en/1.8/ref/csrf/#django.views.decorators.csrf.csrf_exempt)
 
