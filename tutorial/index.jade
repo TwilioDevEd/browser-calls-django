@@ -157,8 +157,8 @@
       `/support/call`.
 
       We use [TwiML](https://www.twilio.com/docs/api/twiml) to respond to the
-      request and tell Twilio how to handle the call. Twilio will include the
-      `phoneNumber` parameter from the previous step in its POST request, which
+      request and tell Twilio how to handle the call. Twilio will pass along the
+      `phoneNumber` parameter from the previous step in its request, which
       we will then [Dial](https://www.twilio.com/docs/api/twiml/dial) in our TwiML.
 
       ---
@@ -173,14 +173,13 @@
     :markdown
       ## The call is live
 
-      After our `call` view from the previous step responds, Twilio
-      completes the connection between our support agent's browser and the
-      customer's phone.
+      After our `call` view responds, Twilio completes the connection between
+      our support agent's browser and the customer's phone.
 
       We use the `Twilio.Device.connect()` callback to update some UI elements
       and make it clear our user is in a call. This function receives a
-      [Connection](https://www.twilio.com/docs/client/connection) object, which
-      offers some additional details about the call.
+      [Connection](https://www.twilio.com/docs/client/connection) object,
+      which offers some additional details about the call.
 
       ---
 
