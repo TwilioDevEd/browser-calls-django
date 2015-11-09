@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from twilio import twiml
-from twilio.util import TwilioCapability
+from twilio.jwt.client import CapabilityToken
 
 from .models import SupportTicket
 
@@ -33,7 +33,7 @@ def support_dashboard(request):
 def get_token(request):
     """Returns a Twilio Client token"""
     # Create a TwilioCapability object with our Twilio API credentials
-    capability = TwilioCapability(
+    capability = CapabilityToken(
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN)
 
