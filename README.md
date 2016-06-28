@@ -63,7 +63,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     python manage.py createsuperuser
     ```
-1. Start the development server
+1. Start the development server:
 
     ```
     python manage.py runserver
