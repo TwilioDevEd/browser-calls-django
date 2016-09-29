@@ -1,3 +1,7 @@
+<a href="https://www.twilio.com">
+  <img src="https://static0.twilio.com/marketing/bundles/marketing/img/logos/wordmark-red.svg" alt="Twilio" width="250" />
+</a>
+
 # Browser Calls (Django)
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/browser-calls-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/browser-calls-django)
@@ -63,7 +67,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     python manage.py createsuperuser
     ```
-1. Start the development server
+1. Start the development server:
 
     ```
     python manage.py runserver
@@ -86,3 +90,9 @@ $ coverage run manage.py test --settings=twilio_sample_project.settings.test
 ```
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
+
+## Meta
+
+* No warranty expressed or implied. Software is as is. Diggity.
+* [MIT License](http://www.opensource.org/licenses/mit-license.html)
+* Lovingly crafted by Twilio Developer Education.
