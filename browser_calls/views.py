@@ -1,13 +1,12 @@
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from twilio import twiml
-from twilio.util import TwilioCapability
+from twilio.jwt.client import CapabilityToken
 
 from .models import SupportTicket
 
@@ -32,8 +31,8 @@ def support_dashboard(request):
 
 def get_token(request):
     """Returns a Twilio Client token"""
-    # Create a TwilioCapability object with our Twilio API credentials
-    capability = TwilioCapability(
+    # Create a TwilioCapability token with our Twilio API credentials
+    capability = CapabilityToken(
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN)
 

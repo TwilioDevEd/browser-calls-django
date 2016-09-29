@@ -72,7 +72,7 @@ class GetTokenTest(TestCase):
         mock_capability.generate.return_value = 'abc123'
 
         # Act
-        with patch('browser_calls.views.TwilioCapability', return_value=mock_capability) as mock:
+        with patch('browser_calls.views.CapabilityToken', return_value=mock_capability) as mock:
             response = self.client.get('/support/token', {'forPage': '/'})
 
         # Assert
@@ -90,7 +90,7 @@ class GetTokenTest(TestCase):
         mock_capability.generate.return_value = 'foo123'
 
         # Act
-        with patch('browser_calls.views.TwilioCapability', return_value=mock_capability) as mock:
+        with patch('browser_calls.views.CapabilityToken', return_value=mock_capability) as mock:
             response = self.client.get('/support/token', {'forPage': '/support/dashboard'})
 
         # Assert
