@@ -1,21 +1,17 @@
-# Requirements for browser-calls-django
-
-# Django (1.8 is a long-term support release)
+coverage==4.0
 Django==1.8
-
-# Third-party app dependencies
 django-bootstrap3==6.2.2
 django-forms-bootstrap==3.0.1
 django-phonenumber-field==0.7.2
-psycopg2==2.6.1
-twilio==4.5.0
-whitenoise==2.0.4
-
-# Production dependencies
+funcsigs==1.0.2
 gunicorn==19.3.0
-
-# Test dependencies
-coverage==4.0
+httplib2==0.9.2
 mock==1.3.0
 model-mommy==1.2.5
+pbr==1.10.0
+phonenumbers==7.7.1
+psycopg2==2.6.1
+pytz==2016.6.1
 six==1.9.0
+twilio~=6.0.0rc13
+whitenoise==2.0.4

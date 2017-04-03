@@ -1,13 +1,12 @@
 from django.conf import settings
-from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
-from twilio import twiml
-from twilio.util import TwilioCapability
+from twilio.twiml.voice_response import Dial
+from twilio.jwt.client import ClientCapabilityToken
 
 from .models import SupportTicket
 
@@ -32,8 +31,8 @@ def support_dashboard(request):
 
 def get_token(request):
     """Returns a Twilio Client token"""
-    # Create a TwilioCapability object with our Twilio API credentials
-    capability = TwilioCapability(
+    # Create a TwilioCapability token with our Twilio API credentials
+    capability = ClientCapabilityToken(
         settings.TWILIO_ACCOUNT_SID,
         settings.TWILIO_AUTH_TOKEN)
 
@@ -58,16 +57,15 @@ def get_token(request):
 @csrf_exempt
 def call(request):
     """Returns TwiML instructions to Twilio's POST requests"""
-    response = twiml.Response()
+    response = Dial(caller_id=settings.TWILIO_NUMBER)
 
-    with response.dial(callerId=settings.TWILIO_NUMBER) as r:
-        # If the browser sent a phoneNumber param, we know this request
-        # is a support agent trying to call a customer's phone
-        if 'phoneNumber' in request.POST:
-            r.number(request.POST['phoneNumber'])
-        else:
-            # Otherwise we assume this request is a customer trying
-            # to contact support from the home page
-            r.client('support_agent')
+    # If the browser sent a phoneNumber param, we know this request
+    # is a support agent trying to call a customer's phone
+    if 'phoneNumber' in request.POST:
+        response.number(request.POST['phoneNumber'])
+    else:
+        # Otherwise we assume this request is a customer trying
+        # to contact support from the home page
+        response.client('support_agent')
 
     return HttpResponse(str(response))
