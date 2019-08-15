@@ -13,5 +13,5 @@ phonenumbers==7.7.1
 psycopg2==2.6.1
 pytz==2016.6.1
 six==1.9.0
-twilio==6.9.0
+twilio==6.29.3
 whitenoise==2.0.4
