@@ -11,7 +11,7 @@ model-mommy==1.2.5
 pbr==1.10.0
 phonenumbers==7.7.1
 psycopg2-binary==2.8.3
-pytz==2016.6.1
+pytz==2019.2
 six==1.9.0
 twilio==6.9.0
 whitenoise==2.0.4
