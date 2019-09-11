@@ -1,18 +1,19 @@
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
-from twilio.twiml.voice_response import Dial, VoiceResponse
 from twilio.jwt.client import ClientCapabilityToken
+from twilio.twiml.voice_response import VoiceResponse
 
 from .models import SupportTicket
 
 
 class SupportTicketCreate(SuccessMessageMixin, CreateView):
     """Renders the home page and the support ticket form"""
+
     model = SupportTicket
     fields = ['name', 'phone_number', 'description']
     template_name = 'index.html'
@@ -33,8 +34,8 @@ def get_token(request):
     """Returns a Twilio Client token"""
     # Create a TwilioCapability token with our Twilio API credentials
     capability = ClientCapabilityToken(
-        settings.TWILIO_ACCOUNT_SID,
-        settings.TWILIO_AUTH_TOKEN)
+        settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN
+    )
 
     # Allow our users to make outgoing calls with Twilio Client
     capability.allow_client_outgoing(settings.TWIML_APPLICATION_SID)
@@ -69,4 +70,6 @@ def call(request):
         # to contact support from the home page
         dial.client('support_agent')
 
-    return HttpResponse(str(response), content_type='application/xml; charset=utf-8')
+    return HttpResponse(
+        str(response), content_type='application/xml; charset=utf-8'
+    )
