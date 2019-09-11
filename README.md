@@ -85,6 +85,16 @@ Once you have started ngrok, update your TwiML app's voice URL setting to use yo
 http://88b37ada.ngrok.io/support/call
 ```
 
+## Testing it humanly
+
+Once everything is setup, you can open two tabs:
+- The support agent: http://localhost:8000/support/dashboard
+- The customer: http://localhost:8000
+
+When the customer click on the "Call Support" button, the support agent will see the call immediatly and be able to pick up the call with the "Answer Call" button.
+
+Another scenario is the customer fill out the form to open a ticket, the support agent can refresh the dashboard and we'll be able to click the "Call customer" button which will start a call to the phone number listed in the ticket.
+
 ## Run the tests
 
 You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
