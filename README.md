@@ -6,10 +6,11 @@
 
 [![Build Status](https://travis-ci.org/TwilioDevEd/browser-calls-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/browser-calls-django)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/browser-calls-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/browser-calls-django?branch=master)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 Learn how to use [Twilio Client](https://www.twilio.com/client) to make browser-to-phone and browser-to-browser calls with Python. The unsatisfied customers of the Birchwood Bicycle Polo Co. need your help!
 
-**Full Tutorial:** https://www.twilio.com/docs/howto/walkthrough/browser-calls/python/django
+**Full Tutorial:** https://www.twilio.com/docs/voice/tutorials/browser-calls-python-django
 
 ## Quickstart
 
@@ -17,23 +18,21 @@ Learn how to use [Twilio Client](https://www.twilio.com/client) to make browser-
 
 This project is configured to use a **TwiML App**, which allows us to easily set the voice URLs for all Twilio phone numbers we purchase in this app.
 
-Create a new TwiML app at https://www.twilio.com/user/account/apps/add and use its `Sid` as the `TWIML_APPLICATION_SID` environment variable wherever you run this app.
+Create a new TwiML app at https://www.twilio.com/console/voice/twiml/apps and use its `Sid` as the `TWIML_APPLICATION_SID` environment variable wherever you run this app.
 
-![Creating a TwiML App](http://howtodocs.s3.amazonaws.com/call-tracking-twiml-app.gif)
-
-Once you have created your TwiML app, configure your Twilio phone number to use it ([instructions here](https://www.twilio.com/help/faq/twilio-client/how-do-i-create-a-twiml-app)). If you don't have a Twilio phone number yet, you can purchase a new number in your [Twilio Account Dashboard](https://www.twilio.com/user/account/phone-numbers/incoming).
+Once you have created your TwiML app, configure your Twilio phone number to use it ([instructions here](https://support.twilio.com/hc/en-us/articles/223180928-How-Do-I-Create-a-TwiML-App-)). If you don't have a Twilio phone number yet, you can purchase a new number in your [Twilio Account Dashboard](https://www.twilio.com/console/phone-numbers/incoming).
 
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 2.7+ and Python 3.4+.
+This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+.
 
 To run the app locally, first clone this repository and `cd` into its directory. Then:
 
 1. Create a new virtual environment:
-    - If using vanilla [virtualenv](https://virtualenv.pypa.io/en/latest/):
+    - If using vanilla [virtualenv](https://docs.python.org/3/library/venv.html):
 
         ```
-        virtualenv venv
+        python -m venv venv
         source venv/bin/activate
         ```
 
@@ -48,9 +47,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     pip install -r requirements.txt
     ```
-1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/user/account/voice) and the phone number and TwimL App Sid you made above
-
-1. Run `source .env` to apply the environment variables (or even better, use [autoenv](https://github.com/kennethreitz/autoenv))
+1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/console) and the phone number and TwimL App Sid you made above. We use [python-dotenv](https://github.com/theskumar/python-dotenv) to load those variables automatically.
 
 1. Start a local PostgreSQL database and create a database called `browser_calls`:
     - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE browser_calls;`
