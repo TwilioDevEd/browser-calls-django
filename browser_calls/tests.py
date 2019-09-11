@@ -12,7 +12,7 @@ class SupportTicketTest(TestCase):
         support_ticket = mommy.make(
             SupportTicket,
             name='Charles Holdsworth',
-            phone_number='+15555555555',
+            phone_number='+12027621401',
             description='I have a problem!',
         )
 
@@ -46,7 +46,7 @@ class SupportDashboardTest(TestCase):
         support_ticket = mommy.make(
             SupportTicket,
             name='Charles Holdsworth',
-            phone_number='+15555555555',
+            phone_number='+12027621401',
             description='I have a problem!',
         )
 
@@ -67,13 +67,13 @@ class GetTokenTest(TestCase):
     def test_get_token_unauthenticated(self):
         # Arrange
         mock_capability = MagicMock()
-        mock_capability.generate.return_value = 'abc123'
+        mock_capability.to_jwt.return_value = b'abc123'
 
         # Act
         with patch(
             'browser_calls.views.ClientCapabilityToken',
             return_value=mock_capability,
-        ) as mock:
+        ):
             response = self.client.get('/support/token', {'forPage': '/'})
 
         # Assert
@@ -83,14 +83,14 @@ class GetTokenTest(TestCase):
         mock_capability.allow_client_incoming.assert_called_once_with(
             'customer'
         )
-        self.assertTrue(mock_capability.generate.called)
+        self.assertTrue(mock_capability.to_jwt.called)
 
         self.assertEqual(response.content, b'{"token": "abc123"}')
 
     def test_get_token_authenticated(self):
         # Arrange
         mock_capability = MagicMock()
-        mock_capability.generate.return_value = 'foo123'
+        mock_capability.to_jwt.return_value = b'foo123'
 
         # Act
         with patch(
@@ -106,7 +106,7 @@ class GetTokenTest(TestCase):
         mock_capability.allow_client_incoming.assert_called_once_with(
             'support_agent'
         )
-        self.assertTrue(mock_capability.generate.called)
+        self.assertTrue(mock_capability.to_jwt.called)
 
         self.assertEqual(response.content, b'{"token": "foo123"}')
 
