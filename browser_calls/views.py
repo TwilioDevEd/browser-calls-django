@@ -1,11 +1,11 @@
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.urlresolvers import reverse, reverse_lazy
+from django.urls import reverse, reverse_lazy
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
-from twilio.twiml.voice_response import Dial
+from twilio.twiml.voice_response import Dial, VoiceResponse
 from twilio.jwt.client import ClientCapabilityToken
 
 from .models import SupportTicket
@@ -49,23 +49,24 @@ def get_token(request):
         capability.allow_client_incoming('customer')
 
     # Generate the capability token
-    token = capability.generate()
+    token = capability.to_jwt()
 
-    return JsonResponse({'token': token})
+    return JsonResponse({'token': token.decode('utf-8')})
 
 
 @csrf_exempt
 def call(request):
     """Returns TwiML instructions to Twilio's POST requests"""
-    response = Dial(caller_id=settings.TWILIO_NUMBER)
+    response = VoiceResponse()
+    dial = response.dial(caller_id=settings.TWILIO_NUMBER)
 
     # If the browser sent a phoneNumber param, we know this request
     # is a support agent trying to call a customer's phone
     if 'phoneNumber' in request.POST:
-        response.number(request.POST['phoneNumber'])
+        dial.number(request.POST['phoneNumber'])
     else:
         # Otherwise we assume this request is a customer trying
         # to contact support from the home page
-        response.client('support_agent')
+        dial.client('support_agent')
 
-    return HttpResponse(str(response))
+    return HttpResponse(str(response), content_type='application/xml; charset=utf-8')

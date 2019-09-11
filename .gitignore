@@ -67,3 +67,7 @@ target/
 
 # PyCharm
 .idea
+
+# NPM stuff:
+node_modules
+package-lock.json

@@ -8,3 +8,5 @@ from .common import *  # noqa
 
 # Use DEBUG for local development
 DEBUG = True
+
+ALLOWED_HOSTS = ['*']
