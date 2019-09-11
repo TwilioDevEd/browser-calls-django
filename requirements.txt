@@ -2,7 +2,7 @@ coverage==4.0
 Django==1.8
 django-bootstrap3==6.2.2
 django-forms-bootstrap==3.0.1
-django-phonenumber-field==0.7.2
+django-phonenumber-field==3.0.1
 funcsigs==1.0.2
 gunicorn==19.3.0
 httplib2==0.9.2
