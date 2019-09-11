@@ -12,7 +12,7 @@ var callCustomerButtons = $(".call-customer-button");
 
 /* Helper function to update the call status bar */
 function updateCallStatus(status) {
-    callStatus.text(status);
+    callStatus.attr('placeholder', status);
 }
 
 /* Get a Twilio Client token with an AJAX request */

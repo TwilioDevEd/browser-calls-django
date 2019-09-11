@@ -7,7 +7,8 @@ class SupportTicket(models.Model):
 
     name = models.CharField(max_length=100)
     phone_number = PhoneNumberField(
-        help_text='Must include international prefix - e.g. +1 555 555 55555')
+        help_text='Must include international prefix - e.g. +1 555 555 55555'
+    )
     description = models.TextField(help_text='A description of your problem')
 
     timestamp = models.DateTimeField(auto_now_add=True)

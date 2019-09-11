@@ -1,4 +1,4 @@
-{% load bootstrap3 %}
+{% load bootstrap4 %}
 {% load staticfiles %}
 
 <!DOCTYPE html>
@@ -16,49 +16,51 @@
 
     <!-- CSS -->
     {% bootstrap_css %}
-    <link href="{% static "css/bicycle-polo.css" %}" rel="stylesheet">
+    <link href="{% static 'css/bicycle-polo.css' %}" rel="stylesheet">
 
     {% block page_css %}{% endblock %}
   </head>
 
   <body>
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Birchwood Bicycle Polo Co.</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Birchwood Bicycle Polo Co.</a>
-        </div>
-
-        <div class="collapse navbar-collapse" id="navbar">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'dashboard' %}">Support dashboard</a></li>
-          </ul>
-        </div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'dashboard' %}">Support Dashboard</a>
+          </li>
+        </ul>
       </div>
     </nav>
 
     {% block content %}{% endblock content %}
 
-    <div class="container">
+    <footer class="container">
+      <div class="row">
+        <p class="p-2 flex-grow-1">&copy; Your Company 2019</p>
 
-      <footer>
-        <p>&copy; Your Company 2015</p>
-      </footer>
-
-    </div> <!-- /container -->
+        {% block footer %}
+        {% endblock %}
+      </div>
+    </footer>
 
     <!-- JavaScript -->
-    {% bootstrap_javascript jquery=1 %}
-    <script src="//static.twilio.com/libs/twiliojs/1.2/twilio.min.js"></script>
+    {% bootstrap_javascript jquery=True %}
+    <script src="{% static 'twilio.min.js' %}"></script>
 
     {% block page_js %}{% endblock %}
 
-    <script src="{% static "js/browser-calls.js" %}"></script>
+    <script src="{% static 'js/browser-calls.js' %}"></script>
 
   </body>
 
