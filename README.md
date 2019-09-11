@@ -47,6 +47,13 @@ To run the app locally, first clone this repository and `cd` into its directory.
     ```
     pip install -r requirements.txt
     ```
+
+1. Install the twilio-client js library:
+
+    ```
+    npm install
+    ```
+
 1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/console) and the phone number and TwimL App Sid you made above. We use [python-dotenv](https://github.com/theskumar/python-dotenv) to load those variables automatically.
 
 1. Start a local PostgreSQL database and create a database called `browser_calls`:
