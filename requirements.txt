@@ -19,7 +19,7 @@ attrs==19.1.0
 Babel==2.7.0
 beautifulsoup4==4.8.0
 black==19.3b0
-certifi==2019.6.16
+certifi==2019.11.28
 chardet==3.0.4
 Click==7.0
 coverage==4.5.4
