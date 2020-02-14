@@ -31,7 +31,7 @@ flake8==3.7.8
 idna==2.8
 mccabe==0.6.1
 model-mommy==1.6.0
-phonenumbers==8.10.18
+phonenumbers==8.11.4
 psycopg2==2.8.3
 pycodestyle==2.5.0
 pyflakes==2.1.1
