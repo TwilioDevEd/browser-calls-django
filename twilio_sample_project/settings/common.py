@@ -31,7 +31,6 @@ load_dotenv(dotenv_path=os.path.join(BASE_DIR, '.env'))
 
 # Twilio API credentials
 TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID')
-TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN')
 
 # Twilio number
 TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER')
@@ -39,10 +38,13 @@ TWILIO_NUMBER = os.environ.get('TWILIO_NUMBER')
 # TwiML Application SID
 TWIML_APPLICATION_SID = os.environ.get('TWIML_APPLICATION_SID')
 
-if not (TWILIO_ACCOUNT_SID and TWILIO_AUTH_TOKEN and TWILIO_NUMBER and TWIML_APPLICATION_SID):
+API_KEY = os.environ.get('API_KEY')
+API_SECRET = os.environ.get('API_SECRET')
+
+if not (TWILIO_ACCOUNT_SID and TWILIO_NUMBER and TWIML_APPLICATION_SID and API_KEY and API_SECRET):
     missing_config_values = \
     """
-    You must set the TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN, TWILIO_NUMBER, and TWIML_APPLICATION_SID environment variables to run this app.
+    You must set the TWILIO_ACCOUNT_SID, TWILIO_NUMBER, TWIML_APPLICATION_SID, API_KEY and API_SECRET environment variables to run this app.
     Consult the README for instructions on how to find them.
     """
     raise ImproperlyConfigured(missing_config_values)
@@ -130,9 +132,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'node_modules', 'twilio-client', 'dist'),
+    os.path.join(BASE_DIR, 'node_modules', 'jquery', 'dist')
 )
 
-STATIC_ROOT = BASE_DIR + '/staticfiles'
+# STATIC_ROOT = BASE_DIR + '/staticfiles'
 
 STATIC_URL = '/static/'
 

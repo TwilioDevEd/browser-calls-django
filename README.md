@@ -4,7 +4,8 @@
 
 # Browser Calls (Django)
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/browser-calls-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/browser-calls-django)
+![](https://github.com/TwilioDevEd/browser-calls-django/workflows/Flask/badge.svg)
+
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/browser-calls-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/browser-calls-django?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -56,7 +57,11 @@ To run the app locally, first clone this repository and `cd` into its directory.
     npm install
     ```
 
-1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/console) and the phone number and TwimL App Sid you made above. We use [python-dotenv](https://github.com/theskumar/python-dotenv) to load those variables automatically.
+1. Copy the `.env.example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/console) and the phone number and TwimL App Sid you made above. We use [python-dotenv](https://github.com/theskumar/python-dotenv) to load those variables automatically.
+
+    ```
+    cp .env.example .env
+    ```
 
 1. Start a local PostgreSQL database and create a database called `browser_calls`:
     - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE browser_calls;`
@@ -79,13 +84,20 @@ To run the app locally, first clone this repository and `cd` into its directory.
     python manage.py runserver
     ```
 
-To actually forward incoming calls, your development server will need to be publicly accessible. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
+1. Expose your application to the wider internet using [ngrok](http://ngrok.com). This step
+   **is important** because the application won't work as expected if you run it through
+   localhost.
 
-Once you have started ngrok, update your TwiML app's voice URL setting to use your ngrok hostname, so it will look something like this:
+   ```bash
+   $ ngrok http 8000
+   ```
 
-```
-http://88b37ada.ngrok.io/support/call
-```
+   Once you have started ngrok, update your [TwiML app's](#create-a-twiml-app) voice URL setting to use
+   your ngrok hostname, so it will look something like this:
+
+   ```
+   http://<your-ngrok-subdomain>.ngrok.io/support/call
+   ```
 
 ## Testing it humanly
 
@@ -110,5 +122,6 @@ You can then view the results with `coverage report` or build an HTML report wit
 ## Meta
 
 * No warranty expressed or implied. Software is as is. Diggity.
+* The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
 * [MIT License](http://www.opensource.org/licenses/mit-license.html)
 * Lovingly crafted by Twilio Developer Education.

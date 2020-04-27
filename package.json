@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "A sample application which shows you how to make and receive phone calls with a browser and Twilio Client",
   "dependencies": {
-    "twilio-client": "^1.9.0"
+    "twilio-client": "^1.10.2",
+    "jquery": "~3.4.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -65,51 +65,36 @@ class GetTokenTest(TestCase):
         self.client = Client()
 
     def test_get_token_unauthenticated(self):
-        # Arrange
-        mock_capability = MagicMock()
-        mock_capability.to_jwt.return_value = b'abc123'
+        mock_access_token = MagicMock()
+        mock_access_token.to_jwt.return_value = b'abc123'
 
-        # Act
         with patch(
-            'browser_calls.views.ClientCapabilityToken',
-            return_value=mock_capability,
+            'browser_calls.views.AccessToken',
+            return_value=mock_access_token
         ):
             response = self.client.get('/support/token', {'forPage': '/'})
 
-        # Assert
-        # Make sure our mock_capability object was called with the right
-        # arguments and that the view returned the correct response
-        self.assertTrue(mock_capability.allow_client_outgoing.called)
-        mock_capability.allow_client_incoming.assert_called_once_with(
-            'customer'
-        )
-        self.assertTrue(mock_capability.to_jwt.called)
+        self.assertTrue(mock_access_token.add_grant.called)
+
+        self.assertTrue(mock_access_token.to_jwt.called)
 
         self.assertEqual(response.content, b'{"token": "abc123"}')
 
     def test_get_token_authenticated(self):
-        # Arrange
-        mock_capability = MagicMock()
-        mock_capability.to_jwt.return_value = b'foo123'
+        mock_access_token = MagicMock()
+        mock_access_token.to_jwt.return_value = b'foo123'
 
-        # Act
         with patch(
-            'browser_calls.views.ClientCapabilityToken',
-            return_value=mock_capability,
-        ) as mock:
-            response = self.client.get(
-                '/support/token', {'forPage': '/support/dashboard'}
-            )
+            'browser_calls.views.AccessToken',
+            return_value=mock_access_token
+        ):
+            response = self.client.get('/support/token', {'forPage': 'support/dashboard'})
 
-        # Assert
-        self.assertTrue(mock_capability.allow_client_outgoing.called)
-        mock_capability.allow_client_incoming.assert_called_once_with(
-            'support_agent'
-        )
-        self.assertTrue(mock_capability.to_jwt.called)
+        self.assertTrue(mock_access_token.add_grant.called)
+
+        self.assertTrue(mock_access_token.to_jwt.called)
 
         self.assertEqual(response.content, b'{"token": "foo123"}')
-
 
 class CallTest(TestCase):
     def setUp(self):
