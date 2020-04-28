@@ -70,3 +70,6 @@ target/
 
 # NPM stuff:
 node_modules
+
+# SQLite database
+db.sqlite3

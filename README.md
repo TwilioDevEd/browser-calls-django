@@ -5,7 +5,6 @@
 # Browser Calls (Django)
 
 ![](https://github.com/TwilioDevEd/browser-calls-django/workflows/Flask/badge.svg)
-
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/browser-calls-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/browser-calls-django?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
@@ -63,9 +62,7 @@ To run the app locally, first clone this repository and `cd` into its directory.
     cp .env.example .env
     ```
 
-1. Start a local PostgreSQL database and create a database called `browser_calls`:
-    - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE browser_calls;`
-    - If Postgres is already installed locally, you can just run `createdb browser_calls` from a terminal
+1. This project works with [Sqlite](https://www.sqlite.org/) you should install it. 
 
 1. Run the migrations with:
 
