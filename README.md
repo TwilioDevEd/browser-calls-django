@@ -82,13 +82,13 @@ Once you have created your TwiML app, configure your Twilio phone number to use 
 
    See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-5. Run the migrations and create a superuser (provide username, email and password), so you can access the Support Dashboard and the Django admin.
+5. Run the migrations.
 
     ```bash
     make serve-setup
     ```
 
-6. Start the development server (will run on port 8000).
+6. Start the development server (will run on port 8000). Before running the following command, make sure the virtual environment is activated.
 
     ```bash
     make serve
@@ -122,7 +122,7 @@ That's it!
 
 ### Tests
 
-You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
+You can run the tests locally through [coverage](http://coverage.readthedocs.org/), before running the following command, make sure the virtual environment is activated.
 
 ```
 $ coverage run manage.py test --settings=twilio_sample_project.settings.test

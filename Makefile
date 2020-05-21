@@ -19,7 +19,6 @@ endif
 
 serve-setup:
 	python3 manage.py migrate; \
-	python3 manage.py createsuperuser;
 
 serve:
 	python3 manage.py runserver;
