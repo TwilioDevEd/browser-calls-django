@@ -18,7 +18,9 @@ else
 endif
 
 serve-setup:
-	python3 manage.py migrate; \
+	. venv/bin/activate; \
+	python3 manage.py migrate;
 
 serve:
+	. venv/bin/activate; \
 	python3 manage.py runserver;
