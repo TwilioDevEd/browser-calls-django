@@ -4,17 +4,45 @@
 
 # Browser Calls (Django)
 
-[![Build Status](https://travis-ci.org/TwilioDevEd/browser-calls-django.svg?branch=master)](https://travis-ci.org/TwilioDevEd/browser-calls-django)
+![](https://github.com/TwilioDevEd/browser-calls-django/workflows/Flask/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/TwilioDevEd/browser-calls-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/browser-calls-django?branch=master)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 > We are currently in the process of updating this sample template. If you are encountering any issues with the sample, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues) and we'll try to help you.
 
+## About
+
+This project is built using the [Django](https://www.djangoproject.com/) web framework.
+
 Learn how to use [Twilio Client](https://www.twilio.com/client) to make browser-to-phone and browser-to-browser calls with Python. The unsatisfied customers of the Birchwood Bicycle Polo Co. need your help!
 
 **Full Tutorial:** https://www.twilio.com/docs/voice/tutorials/browser-calls-python-django
 
-## Quickstart
+Implementations in other languages:
+
+| .NET | Java | Node | PHP | Ruby |
+| :--- | :--- | :----- | :-- | :--- |
+| [Done](https://github.com/TwilioDevEd/browser-calls-csharp) | [Done](https://github.com/TwilioDevEd/browser-calls-spark)  | [Done](https://github.com/TwilioDevEd/browser-calls-node)  | [Done](https://github.com/TwilioDevEd/browser-calls-laravel) | [Done](https://github.com/TwilioDevEd/browser-calls-rails)  |
+
+## Set up
+
+### Requirements
+
+- [Python](https://www.python.org/) **3.6**, **3.7** or **3.8** version
+- [Sqlite3](https://www.sqlite.org/)
+- [Nodejs](https://nodejs.org/) v10 or v12
+
+### Twilio Account Settings
+
+This application should give you a ready-made starting point for writing your own application.
+Before we begin, we need to collect all the config values we need to run the application:
+
+| Config Value | Description            |
+| :----------- | :----------------------|
+| TWILIO_ACCOUNT_SID  | Your primary Twilio account identifier - find this [in the Console](https://www.twilio.com/console).|
+| TWILIO_NUMBER | A Twilio phone number in [E.164 format](https://en.wikipedia.org/wiki/E.164) - you can [get one here](https://www.twilio.com/console/phone-numbers/incoming) |
+| TWIML_APPLICATION_SID | The TwiML application with a voice URL configured to access your server running this app - create one [in the console here](https://www.twilio.com/console/voice/twiml/apps). Also, you will need to configure the Voice "REQUEST URL" on the TwiML app once you've got your server up and running. |
+| API_KEY / API_SECRET | Your REST API Key information needed to create an [Access Token](https://www.twilio.com/docs/iam/access-tokens) - create [one here](https://www.twilio.com/console/project/api-keys). |
 
 ### Create a TwiML App
 
@@ -26,80 +54,75 @@ Once you have created your TwiML app, configure your Twilio phone number to use 
 
 ### Local development
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework. It runs on Python 3.6+.
+1. Clone this repo and `cd` into it.
 
-To run the app locally, first clone this repository and `cd` into its directory. Then:
+   ```bash
+   git clone https://github.com/TwilioDevEd/browser-calls-django.git
+   cd browser-calls-django
+   ```
 
-1. Create a new virtual environment:
-    - If using vanilla [virtualenv](https://docs.python.org/3/library/venv.html):
+2. Create a new virtual environment, load it and install dependencies.
 
-        ```
-        python -m venv venv
-        source venv/bin/activate
-        ```
+   ```bash
+   make install
+   ```
 
-    - If using [virtualenvwrapper](https://virtualenvwrapper.readthedocs.org/en/latest/):
 
-        ```
-        mkvirtualenv browser-calls-django
-        ```
+3. Install the twilio-client js library.
 
-1. Install the requirements:
+   ```bash
+   npm install
+   ```
 
-    ```
-    pip install -r requirements.txt
-    ```
+4. Set your environment variables. Copy the env.example file and edit it.
 
-1. Install the twilio-client js library:
+   ```bash
+   cp .env.example .env
+   ```
 
-    ```
-    npm install
-    ```
+   See [Twilio Account Settings](#twilio-account-settings) to locate the necessary environment variables.
 
-1. Copy the `.env_example` file to `.env`, and edit it to include your [Twilio API credentials](https://www.twilio.com/console) and the phone number and TwimL App Sid you made above. We use [python-dotenv](https://github.com/theskumar/python-dotenv) to load those variables automatically.
+5. Run the migrations.
 
-1. Start a local PostgreSQL database and create a database called `browser_calls`:
-    - If on a Mac, we recommend [Postgres.app](http://postgresapp.com/). After install, open psql and run `CREATE DATABASE browser_calls;`
-    - If Postgres is already installed locally, you can just run `createdb browser_calls` from a terminal
-
-1. Run the migrations with:
-
-    ```
-    python manage.py migrate
+    ```bash
+    make serve-setup
     ```
 
-1. Be sure to create a superuser so you can access the Support Dashboard and the Django admin:
+6. Start the development server (will run on port 8000). Before running the following command, make sure the virtual environment is activated.
 
-    ```
-    python manage.py createsuperuser
-    ```
-1. Start the development server:
-
-    ```
-    python manage.py runserver
+    ```bash
+    make serve
     ```
 
-To actually forward incoming calls, your development server will need to be publicly accessible. [We recommend using ngrok to solve this problem](https://www.twilio.com/blog/2015/09/6-awesome-reasons-to-use-ngrok-when-testing-webhooks.html).
+7. Expose your application to the wider internet using [ngrok](http://ngrok.com). This step
+   **is important** because the application won't work as expected if you run it through
+   localhost.
 
-Once you have started ngrok, update your TwiML app's voice URL setting to use your ngrok hostname, so it will look something like this:
+   ```bash
+   $ ngrok http 8000
+   ```
 
-```
-http://88b37ada.ngrok.io/support/call
-```
+8. Once you have started ngrok, update your [TwiML app's](#create-a-twiml-app) voice URL setting to use
+   your ngrok hostname, so it will look something like this:
 
-## Testing it humanly
+   ```bash
+   http://<your-ngrok-subdomain>.ngrok.io/support/call
+   ```
 
-Once everything is setup, you can open two tabs:
-- The support agent: http://localhost:8000/support/dashboard
-- The customer: http://localhost:8000
+9. Everything is setup, now you can open two tabs:
+    - The support agent: http://localhost:8000/support/dashboard
+    - The customer: http://localhost:8000
 
-When the customer click on the "Call Support" button, the support agent will see the call immediatly and be able to pick up the call with the "Answer Call" button.
+    When the customer click on the "Call Support" button, the support agent will see the call immediatly and be able to pick up the call with the "Answer Call" button.
 
-Another scenario is the customer fill out the form to open a ticket, the support agent can refresh the dashboard and we'll be able to click the "Call customer" button which will start a call to the phone number listed in the ticket.
+    Another scenario is the customer fill out the form to open a ticket, the support agent can refresh the dashboard and we'll be able to click the "Call customer" button which will start a call to the phone number listed in the ticket.
 
-## Run the tests
 
-You can run the tests locally through [coverage](http://coverage.readthedocs.org/):
+That's it!
+
+### Tests
+
+You can run the tests locally through [coverage](http://coverage.readthedocs.org/), before running the following command, make sure the virtual environment is activated.
 
 ```
 $ coverage run manage.py test --settings=twilio_sample_project.settings.test
@@ -107,8 +130,30 @@ $ coverage run manage.py test --settings=twilio_sample_project.settings.test
 
 You can then view the results with `coverage report` or build an HTML report with `coverage html`.
 
-## Meta
+### Cloud deployment
 
-* No warranty expressed or implied. Software is as is. Diggity.
-* [MIT License](http://www.opensource.org/licenses/mit-license.html)
-* Lovingly crafted by Twilio Developer Education.
+Additionally to trying out this application locally, you can deploy it to a variety of host services. Here is a small selection of them.
+
+Please be aware that some of these might charge you for the usage or might make the source code for this application visible to the public. When in doubt research the respective hosting service first.
+
+| Service                           |                                                                                                                                                                                                                           |
+| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| [Heroku](https://www.heroku.com/) | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)                                                                                                                                       |
+
+## Resources
+
+- The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
+
+## Contributing
+
+This template is open source and welcomes contributions. All contributions are subject to our [Code of Conduct](https://github.com/twilio-labs/.github/blob/master/CODE_OF_CONDUCT.md).
+
+## License
+
+[MIT](http://www.opensource.org/licenses/mit-license.html)
+
+## Disclaimer
+
+No warranty expressed or implied. Software is as is.
+
+[twilio]: https://www.twilio.com

@@ -5,7 +5,8 @@ from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
-from twilio.jwt.client import ClientCapabilityToken
+from twilio.jwt.access_token import AccessToken
+from twilio.jwt.access_token.grants import VoiceGrant
 from twilio.twiml.voice_response import VoiceResponse
 
 from .models import SupportTicket
@@ -31,29 +32,21 @@ def support_dashboard(request):
 
 
 def get_token(request):
-    """Returns a Twilio Client token"""
-    # Create a TwilioCapability token with our Twilio API credentials
-    capability = ClientCapabilityToken(
-        settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN
+    identity = 'support_agent' if 'dashboard' in request.GET['forPage'] else 'customer'
+
+    # Create access token with credentials
+    access_token = AccessToken(settings.TWILIO_ACCOUNT_SID, settings.API_KEY, settings.API_SECRET, identity=identity)
+
+    # Create a Voice grant and add to token
+    voice_grant = VoiceGrant(
+        outgoing_application_sid=settings.TWIML_APPLICATION_SID,
+        incoming_allow=True, # Optional: add to allow incoming calls
     )
+    access_token.add_grant(voice_grant)
 
-    # Allow our users to make outgoing calls with Twilio Client
-    capability.allow_client_outgoing(settings.TWIML_APPLICATION_SID)
-
-    # If the user is on the support dashboard page, we allow them to accept
-    # incoming calls to "support_agent"
-    # (in a real app we would also require the user to be authenticated)
-    if request.GET['forPage'] == reverse('dashboard'):
-        capability.allow_client_incoming('support_agent')
-    else:
-        # Otherwise we give them a name of "customer"
-        capability.allow_client_incoming('customer')
-
-    # Generate the capability token
-    token = capability.to_jwt()
+    token = access_token.to_jwt()
 
     return JsonResponse({'token': token.decode('utf-8')})
-
 
 @csrf_exempt
 def call(request):
