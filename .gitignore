@@ -73,3 +73,5 @@ node_modules
 
 # SQLite database
 db.sqlite3
+
+.tool-versions
