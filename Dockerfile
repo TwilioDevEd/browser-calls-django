@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:latest
+FROM nikolaik/python-nodejs:python3.8-nodejs10
 
 ENV PYTHONUNBUFFERED 1
 
