@@ -23,7 +23,7 @@ certifi==2020.4.5.1
 chardet==3.0.4
 Click==7.1.1
 coverage==5.1
-Django==3.0.5
+Django==3.0.7
 django-bootstrap4==1.1.1
 django-phonenumber-field==4.0.0
 entrypoints==0.3
