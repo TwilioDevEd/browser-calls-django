@@ -43,6 +43,6 @@ six==1.14.0
 soupsieve==2.0
 sqlparse==0.3.1
 toml==0.10.0
-twilio==6.38.1
+twilio==6.44.2
 urllib3==1.25.9
 whitenoise==5.0.1
