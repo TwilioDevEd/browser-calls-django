@@ -28,7 +28,7 @@ django-bootstrap4==1.1.1
 django-phonenumber-field==4.0.0
 entrypoints==0.3
 flake8==3.7.9
-idna==2.9
+idna==2.10
 mccabe==0.6.1
 model-mommy==2.0.0
 phonenumbers==8.12.2
