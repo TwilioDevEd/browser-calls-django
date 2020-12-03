@@ -37,7 +37,7 @@ pyflakes==2.1.1
 PyJWT==1.7.1
 PySocks==1.7.1
 python-dotenv==0.13.0
-pytz==2019.3
+pytz==2020.4
 requests==2.23.0
 six==1.14.0
 soupsieve==2.0.1
