@@ -36,7 +36,7 @@ pycodestyle==2.5.0
 pyflakes==2.1.1
 PyJWT==1.7.1
 PySocks==1.7.1
-python-dotenv==0.13.0
+python-dotenv==0.15.0
 pytz==2020.4
 requests==2.23.0
 six==1.15.0
