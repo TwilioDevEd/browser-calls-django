@@ -24,7 +24,7 @@ chardet==3.0.4
 Click==7.1.1
 coverage==5.3
 Django==3.0.8
-django-bootstrap4==1.1.1
+django-bootstrap4==2.3.1
 django-phonenumber-field==4.0.0
 entrypoints==0.3
 flake8==3.7.9
