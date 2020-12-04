@@ -22,7 +22,7 @@ black==19.10b0
 certifi==2020.11.8
 chardet==3.0.4
 Click==7.1.1
-coverage==5.1
+coverage==5.3
 Django==3.0.8
 django-bootstrap4==1.1.1
 django-phonenumber-field==4.0.0
