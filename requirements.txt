@@ -39,7 +39,7 @@ PySocks==1.7.1
 python-dotenv==0.13.0
 pytz==2020.4
 requests==2.23.0
-six==1.14.0
+six==1.15.0
 soupsieve==2.0.1
 sqlparse==0.4.1
 toml==0.10.0
