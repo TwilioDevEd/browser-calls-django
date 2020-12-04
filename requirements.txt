@@ -14,7 +14,7 @@
 # twilio
 # whitenoise
 
-appdirs==1.4.3
+appdirs==1.4.4
 attrs==20.3.0
 Babel==2.8.0
 beautifulsoup4==4.9.0
