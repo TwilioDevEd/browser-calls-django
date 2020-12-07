@@ -17,7 +17,7 @@
 appdirs==1.4.4
 attrs==20.3.0
 Babel==2.8.0
-beautifulsoup4==4.9.0
+beautifulsoup4==4.9.3
 black==19.10b0
 certifi==2020.11.8
 chardet==3.0.4
