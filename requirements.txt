@@ -42,7 +42,7 @@ requests==2.25.0
 six==1.15.0
 soupsieve==2.0.1
 sqlparse==0.4.1
-toml==0.10.0
+toml==0.10.2
 twilio==6.49.0
 urllib3==1.25.9
 whitenoise==5.2.0
