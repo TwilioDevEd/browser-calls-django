@@ -38,7 +38,7 @@ PyJWT==1.7.1
 PySocks==1.7.1
 python-dotenv==0.15.0
 pytz==2020.4
-requests==2.25.0
+requests==2.25.1
 six==1.15.0
 soupsieve==2.1
 sqlparse==0.4.1
