@@ -33,7 +33,7 @@ mccabe==0.6.1
 model-mommy==2.0.0
 phonenumbers==8.12.16
 pycodestyle==2.5.0
-pyflakes==2.1.1
+pyflakes==2.2.0
 PyJWT==2.0.1
 PySocks==1.7.1
 python-dotenv==0.15.0
