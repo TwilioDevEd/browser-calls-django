@@ -32,7 +32,7 @@ idna==2.10
 mccabe==0.6.1
 model-mommy==2.0.0
 phonenumbers==8.12.19
-pycodestyle==2.5.0
+pycodestyle==2.6.0
 pyflakes==2.1.1
 PyJWT==2.0.1
 PySocks==1.7.1
