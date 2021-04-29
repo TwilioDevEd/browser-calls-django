@@ -1,0 +1,33 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: flake8
+    versions:
+    - 3.8.4
+    - 3.9.0
+  - dependency-name: twilio
+    versions:
+    - 6.51.1
+    - 6.52.0
+    - 6.53.0
+    - 6.54.0
+    - 6.55.0
+    - 6.56.0
+  - dependency-name: python-dotenv
+    versions:
+    - 0.16.0
+  - dependency-name: pyflakes
+    versions:
+    - 2.2.0
+    - 2.3.0
+  - dependency-name: pycodestyle
+    versions:
+    - 2.6.0
+  - dependency-name: phonenumbers
+    versions:
+    - 8.12.17
