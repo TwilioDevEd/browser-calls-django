@@ -44,5 +44,5 @@ soupsieve==2.2.1
 sqlparse==0.4.1
 toml==0.10.2
 twilio==6.50.1
-urllib3==1.26.4
+urllib3==1.26.9
 whitenoise==5.2.0
