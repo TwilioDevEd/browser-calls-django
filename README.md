@@ -4,25 +4,12 @@
 
 # Browser Calls (Django)
 
-![](https://github.com/TwilioDevEd/browser-calls-django/workflows/Flask/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/TwilioDevEd/browser-calls-django/badge.svg?branch=master&service=github)](https://coveralls.io/github/TwilioDevEd/browser-calls-django?branch=master)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
-> This template is part of Twilio CodeExchange. If you encounter any issues with this code, please open an issue at [github.com/twilio-labs/code-exchange/issues](https://github.com/twilio-labs/code-exchange/issues).
+> This repository is now archived and is no longer being maintained. 
+> Check out the [JavaScript SDK Quickstarts](https://www.twilio.com/docs/voice/sdks/javascript/get-started) to get started with browser-based calling. 
 
 ## About
 
-This project is built using the [Django](https://www.djangoproject.com/) web framework.
-
-Learn how to use [Twilio Client](https://www.twilio.com/client) to make browser-to-phone and browser-to-browser calls with Python. The unsatisfied customers of the Birchwood Bicycle Polo Co. need your help!
-
-**Full Tutorial:** https://www.twilio.com/docs/voice/tutorials/browser-calls-python-django
-
-Implementations in other languages:
-
-| .NET | Java | Node | PHP | Ruby |
-| :--- | :--- | :----- | :-- | :--- |
-| [Done](https://github.com/TwilioDevEd/browser-calls-csharp) | [Done](https://github.com/TwilioDevEd/browser-calls-spark)  | [Done](https://github.com/TwilioDevEd/browser-calls-node)  | [Done](https://github.com/TwilioDevEd/browser-calls-laravel) | [Done](https://github.com/TwilioDevEd/browser-calls-rails)  |
+Learn how to use [Twilio's JavaScript SDK](https://www.twilio.com/docs/voice/sdks/javascript) to make browser-to-phone and browser-to-browser calls with ease. The unsatisfied customers of the Birchwood Bicycle Polo Co. need your help!
 
 ## Set up
 
@@ -119,15 +106,6 @@ Once you have created your TwiML app, configure your Twilio phone number to use 
 
 That's it!
 
-### Docker
-
-If you have [Docker](https://www.docker.com/) already installed on your machine, you can use our `docker-compose.yml` to setup your project.
-
-1. Make sure you have the project cloned.
-2. Setup the `.env` file as outlined in the [Local Development](#local-development) steps.
-3. Run `docker-compose up`.
-4. Follow the steps in [Local Development](#local-development) on how to expose your port to Twilio using a tool like [ngrok](https://ngrok.com/) and configure the remaining parts of your application.
-
 ### Tests
 
 You can run the tests locally through [coverage](http://coverage.readthedocs.org/), before running the following command, make sure the virtual environment is activated.
@@ -136,25 +114,11 @@ You can run the tests locally through [coverage](http://coverage.readthedocs.org
 $ coverage run manage.py test --settings=twilio_sample_project.settings.test
 ```
 
-You can then view the results with `coverage report` or build an HTML report with `coverage html`.
-
-### Cloud deployment
-
-Additionally to trying out this application locally, you can deploy it to a variety of host services. Here is a small selection of them.
-
-Please be aware that some of these might charge you for the usage or might make the source code for this application visible to the public. When in doubt research the respective hosting service first.
-
-| Service                           |                                                                                                                                                                                                                           |
-| :-------------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [Heroku](https://www.heroku.com/) | [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)                                                                                                                                       |
+You can then view the results with `coverage report` or build an HTML report with `coverage html`.                        |
 
 ## Resources
 
 - The CodeExchange repository can be found [here](https://github.com/twilio-labs/code-exchange/).
-
-## Contributing
-
-This template is open source and welcomes contributions. All contributions are subject to our [Code of Conduct](https://github.com/twilio-labs/.github/blob/master/CODE_OF_CONDUCT.md).
 
 ## License
 
